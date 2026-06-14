@@ -38,6 +38,7 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(
         json.dumps(data, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -61,3 +62,12 @@ def find_pdf_files(input_dir: Path) -> list[Path]:
 
 def relative_to_report(path: Path, report_dir: Path) -> str:
     return path.relative_to(report_dir).as_posix()
+
+
+def project_relative_path(path: Path, project_root: Path) -> str:
+    resolved_path = path.resolve()
+    resolved_root = project_root.resolve()
+    try:
+        return resolved_path.relative_to(resolved_root).as_posix()
+    except ValueError:
+        return resolved_path.as_posix()

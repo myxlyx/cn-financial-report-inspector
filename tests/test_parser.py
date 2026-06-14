@@ -32,10 +32,20 @@ def test_process_pdf_outputs_report_files_for_chinese_filename(tmp_path: Path):
     assert (report_dir / "tables_index.jsonl").exists()
 
     metadata = json.loads((report_dir / "metadata.json").read_text(encoding="utf-8"))
+    manifest = json.loads(
+        (manifests_root / f"{result.report_id}.json").read_text(encoding="utf-8")
+    )
     quality = json.loads((report_dir / "parse_quality.json").read_text(encoding="utf-8"))
+    assert not Path(metadata["source_pdf"]).is_absolute()
+    assert not Path(manifest["source_pdf"]).is_absolute()
     assert metadata["parse_quality_path"] == "parse_quality.json"
     assert metadata["tables_index_path"] == "tables_index.jsonl"
     assert quality["page_count"] == 1
+    assert "recommended_for_dataset" in quality
+    assert "quality_level" in quality
+    assert "pages_with_tables" in quality
+    assert "chinese_char_ratio" in quality
+    assert "garbled_char_ratio" in quality
 
 
 def test_force_recreates_report_directory(tmp_path: Path):

@@ -15,7 +15,11 @@ TEXT_BASED_PAGE_RATIO = 0.8
 MIXED_PAGE_RATIO = 0.2
 
 
-def classify_pdf(pdf_path: Path, report_id: str | None = None) -> PdfManifest:
+def classify_pdf(
+    pdf_path: Path,
+    report_id: str | None = None,
+    source_pdf: str | None = None,
+) -> PdfManifest:
     """Classify a PDF as text-based, mixed, scanned/image-based, or failed."""
     report_id = report_id or slugify_filename(pdf_path)
     notes: list[str] = []
@@ -25,7 +29,7 @@ def classify_pdf(pdf_path: Path, report_id: str | None = None) -> PdfManifest:
     except Exception as exc:
         return PdfManifest(
             report_id=report_id,
-            source_pdf=str(pdf_path),
+            source_pdf=source_pdf or str(pdf_path),
             pdf_type="parse_failed",
             page_count=0,
             text_pages=0,
@@ -39,7 +43,7 @@ def classify_pdf(pdf_path: Path, report_id: str | None = None) -> PdfManifest:
         if page_count == 0:
             return PdfManifest(
                 report_id=report_id,
-                source_pdf=str(pdf_path),
+                source_pdf=source_pdf or str(pdf_path),
                 pdf_type="parse_failed",
                 page_count=0,
                 text_pages=0,
@@ -72,7 +76,7 @@ def classify_pdf(pdf_path: Path, report_id: str | None = None) -> PdfManifest:
 
         return PdfManifest(
             report_id=report_id,
-            source_pdf=str(pdf_path),
+            source_pdf=source_pdf or str(pdf_path),
             pdf_type=pdf_type,
             page_count=page_count,
             text_pages=text_pages,
@@ -83,7 +87,7 @@ def classify_pdf(pdf_path: Path, report_id: str | None = None) -> PdfManifest:
     except Exception as exc:
         return PdfManifest(
             report_id=report_id,
-            source_pdf=str(pdf_path),
+            source_pdf=source_pdf or str(pdf_path),
             pdf_type="parse_failed",
             page_count=doc.page_count if doc else 0,
             text_pages=0,
