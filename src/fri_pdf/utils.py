@@ -10,6 +10,12 @@ from pathlib import Path
 from typing import Iterable
 
 
+def _safe_unicode_text(text: str) -> str:
+    return text.encode("utf-8", errors="replace").decode(
+        "utf-8", errors="replace"
+    )
+
+
 def ensure_dir(path: Path) -> Path:
     path.mkdir(parents=True, exist_ok=True)
     return path
@@ -23,13 +29,14 @@ def reset_dir(path: Path) -> Path:
 
 def slugify_filename(path: Path, max_base_len: int = 80) -> str:
     """Create a filesystem-safe report id from a possibly Chinese filename."""
-    stem = path.stem.strip()
+    safe_name = _safe_unicode_text(path.name)
+    stem = Path(safe_name).stem.strip()
     cleaned = re.sub(r"[\\/:*?\"<>|：]+", "_", stem)
     cleaned = re.sub(r"\s+", "_", cleaned).strip("._ ")
     if not cleaned:
         cleaned = "report"
 
-    name_bytes = path.name.encode("utf-8", errors="replace")
+    name_bytes = path.name.encode("utf-8", errors="backslashreplace")
     digest = hashlib.sha1(name_bytes).hexdigest()[:8]
     return f"{cleaned[:max_base_len]}_{digest}"
 

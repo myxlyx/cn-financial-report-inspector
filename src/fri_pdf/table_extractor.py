@@ -95,7 +95,7 @@ def _extract_table_rows(table: Any) -> list[list[str]]:
 def _write_csv(path: Path, rows: list[list[str]]) -> None:
     ensure_dir(path.parent)
     with path.open("w", encoding="utf-8-sig", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerows(rows)
 
 

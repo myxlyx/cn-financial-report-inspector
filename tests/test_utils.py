@@ -29,8 +29,11 @@ def test_slugify_filename_handles_surrogate_characters():
     filename = "异常\udcff报告.pdf"
     report_id = slugify_filename(Path(filename))
     expected_digest = hashlib.sha1(
-        filename.encode("utf-8", errors="replace")
+        filename.encode("utf-8", errors="backslashreplace")
     ).hexdigest()[:8]
 
+    assert "\udcff" not in report_id
+    report_id.encode("utf-8")
     assert report_id.startswith("异常")
     assert report_id.endswith(f"_{expected_digest}")
+    assert len(report_id.rsplit("_", 1)[-1]) == 8
