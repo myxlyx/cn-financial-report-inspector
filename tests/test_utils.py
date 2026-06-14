@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 
 from fri_pdf.utils import find_pdf_files, slugify_filename
@@ -22,3 +23,14 @@ def test_slugify_filename_handles_chinese_names():
     assert report_id.startswith("汽轮科技_2025年年度报告_")
     assert ":" not in report_id
     assert len(report_id.rsplit("_", 1)[-1]) == 8
+
+
+def test_slugify_filename_handles_surrogate_characters():
+    filename = "异常\udcff报告.pdf"
+    report_id = slugify_filename(Path(filename))
+    expected_digest = hashlib.sha1(
+        filename.encode("utf-8", errors="replace")
+    ).hexdigest()[:8]
+
+    assert report_id.startswith("异常")
+    assert report_id.endswith(f"_{expected_digest}")

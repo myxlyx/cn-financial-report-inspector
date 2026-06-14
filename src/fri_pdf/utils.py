@@ -29,7 +29,8 @@ def slugify_filename(path: Path, max_base_len: int = 80) -> str:
     if not cleaned:
         cleaned = "report"
 
-    digest = hashlib.sha1(path.name.encode("utf-8")).hexdigest()[:8]
+    name_bytes = path.name.encode("utf-8", errors="replace")
+    digest = hashlib.sha1(name_bytes).hexdigest()[:8]
     return f"{cleaned[:max_base_len]}_{digest}"
 
 
