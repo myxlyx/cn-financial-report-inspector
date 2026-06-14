@@ -10,6 +10,7 @@ env/
 .env
 .DS_Store
 Thumbs.db
+exports/
 
 # Keep full datasets local by default. GitHub only tracks compact examples.
 data/raw_pdfs/*.pdf
