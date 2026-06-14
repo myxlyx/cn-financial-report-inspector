@@ -1,0 +1,41 @@
+{
+  "table_id": "table_129",
+  "page": 163,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    76.38000106811523,
+    150.06999969482422,
+    756.77001953125,
+    206.69000244140625
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_129.csv",
+  "json_path": "tables/table_129.json",
+  "title_candidate": "项目列示",
+  "section_candidate": "一、账面原值：",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.3333,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "固定资产",
+      "867,098,822.70",
+      "903,486,731.24"
+    ],
+    [
+      "固定资产清理",
+      "/",
+      "/"
+    ],
+    [
+      "合计",
+      "867,098,822.70",
+      "903,486,731.24"
+    ]
+  ]
+}

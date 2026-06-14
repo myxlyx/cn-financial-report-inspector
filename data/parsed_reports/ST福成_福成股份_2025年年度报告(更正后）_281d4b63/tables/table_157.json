@@ -1,0 +1,41 @@
+{
+  "table_id": "table_157",
+  "page": 175,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    335.6699981689453,
+    542.5950012207031,
+    392.239990234375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_157.csv",
+  "json_path": "tables/table_157.json",
+  "title_candidate": "单位：元币种：人民币",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "预收墓位款",
+      "15,536,044.00",
+      "15,658,614.00"
+    ],
+    [
+      "其他预收款",
+      "12,355,510.89",
+      "12,759,885.32"
+    ],
+    [
+      "合计",
+      "27,891,554.89",
+      "28,418,499.32"
+    ]
+  ]
+}

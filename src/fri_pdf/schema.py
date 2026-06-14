@@ -45,6 +45,12 @@ class TableMetadata:
     bbox: list[float] | None
     source_method: str
     csv_path: str
+    json_path: str
+    title_candidate: str | None
+    section_candidate: str | None
+    blank_cell_ratio: float
+    numeric_cell_ratio: float
+    data: list[list[str]]
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -60,6 +66,8 @@ class ReportMetadata:
     pages_jsonl_path: str
     tables_count: int
     tables_dir: str
+    tables_index_path: str
+    parse_quality_path: str
     parse_warnings: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:

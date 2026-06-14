@@ -1,0 +1,27 @@
+{
+  "table_id": "table_045",
+  "page": 42,
+  "rows": 1,
+  "columns": 4,
+  "bbox": [
+    89.97999954223633,
+    76.36999893188477,
+    543.1199951171875,
+    145.08999633789062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_045.csv",
+  "json_path": "tables/table_045.json",
+  "title_candidate": "河北福成五丰食品股份有限公司2025 年年度报告",
+  "section_candidate": "二、李良先生的工作经历及工作能力能够胜任公司",
+  "blank_cell_ratio": 0.75,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "",
+      "二、李良先生的工作经历及工作能力能够胜任公司\n总经理的职责要求。三、甄兰兰女士的工作经历及\n工作能力能够胜任公司财务总监的职责要求。四、\n李伟先生的工作经历及工作能力能够胜任公司董\n事会秘书的职责要求。",
+      "",
+      ""
+    ]
+  ]
+}

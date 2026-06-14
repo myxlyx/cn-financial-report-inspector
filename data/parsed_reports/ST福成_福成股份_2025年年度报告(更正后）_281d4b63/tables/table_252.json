@@ -1,0 +1,30 @@
+{
+  "table_id": "table_252",
+  "page": 224,
+  "rows": 1,
+  "columns": 7,
+  "bbox": [
+    90.0999984741211,
+    76.48999786376953,
+    542.9500122070312,
+    90.58999633789062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_252.csv",
+  "json_path": "tables/table_252.json",
+  "title_candidate": "其中本期坏账准备转回或收回金额重要的：",
+  "section_candidate": "5 年以上",
+  "blank_cell_ratio": 0.2857,
+  "numeric_cell_ratio": 0.8,
+  "data": [
+    [
+      "合计",
+      "23,456,515.49",
+      "140,475.73",
+      "20,266.12",
+      "",
+      "",
+      "23,576,725.10"
+    ]
+  ]
+}

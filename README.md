@@ -37,15 +37,17 @@ PDF filenames may contain Chinese characters. The parser does not hard-code any 
 
 ## Data Policy For GitHub
 
-The GitHub repository intentionally does not include the full raw PDFs or full parsed outputs. Those files can be large and may also need separate data-governance decisions.
+The GitHub repository intentionally does not include every raw PDF or every parsed output. Full datasets can be large and may also need separate data-governance decisions.
 
-GitHub tracks only compact examples under:
+To make the repository useful for code review and web-based analysis, GitHub tracks one complete real example using the same directory layout as local runs:
 
 ```text
-data/sample_reports/
+data/raw_pdfs/
+data/manifests/
+data/parsed_reports/
 ```
 
-The sample files show the expected manifest, metadata, page JSONL, Markdown excerpt, and table CSV/JSON formats. Put full local inputs and generated outputs under `data/raw_pdfs/`, `data/parsed_reports/`, and `data/manifests/`; these paths are ignored by Git.
+Other full local inputs and generated outputs under these directories are ignored by Git. The tracked example shows the expected manifest, metadata, parse quality report, page JSONL, Markdown, table index, and table CSV/JSON formats.
 
 ## Install Dependencies
 
@@ -67,6 +69,17 @@ From the project root:
 python scripts/parse_pdfs.py
 ```
 
+Useful options:
+
+```bash
+python scripts/parse_pdfs.py --input-dir data/raw_pdfs
+python scripts/parse_pdfs.py --pdf data/raw_pdfs/example.pdf
+python scripts/parse_pdfs.py --limit 1
+python scripts/parse_pdfs.py --force
+```
+
+`--force` removes and regenerates each selected report output directory. PDF discovery is case-insensitive, so both `.pdf` and `.PDF` files are supported.
+
 The script will:
 
 1. Detect each PDF type.
@@ -87,6 +100,8 @@ data/
       report.md
       pages.jsonl
       metadata.json
+      parse_quality.json
+      tables_index.jsonl
       tables/
         table_001.csv
         table_001.json
@@ -125,7 +140,27 @@ Report metadata example:
   "pages_jsonl_path": "pages.jsonl",
   "tables_count": 0,
   "tables_dir": "tables",
+  "tables_index_path": "tables_index.jsonl",
+  "parse_quality_path": "parse_quality.json",
   "parse_warnings": []
+}
+```
+
+Each table JSON stores both metadata and full table data:
+
+```json
+{
+  "table_id": "table_001",
+  "page": 12,
+  "rows": 10,
+  "columns": 5,
+  "title_candidate": "...",
+  "section_candidate": "...",
+  "blank_cell_ratio": 0.12,
+  "numeric_cell_ratio": 0.45,
+  "csv_path": "tables/table_001.csv",
+  "json_path": "tables/table_001.json",
+  "data": [["项目", "金额"]]
 }
 ```
 

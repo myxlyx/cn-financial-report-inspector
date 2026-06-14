@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -14,21 +15,57 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from fri_pdf.parser import process_pdf  # noqa: E402
-from fri_pdf.utils import ensure_dir  # noqa: E402
+from fri_pdf.utils import ensure_dir, find_pdf_files  # noqa: E402
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Parse Chinese financial report PDFs.")
+    parser.add_argument(
+        "--input-dir",
+        type=Path,
+        default=PROJECT_ROOT / "data" / "raw_pdfs",
+        help="Directory containing PDFs. Defaults to data/raw_pdfs.",
+    )
+    parser.add_argument(
+        "--pdf",
+        type=Path,
+        action="append",
+        default=[],
+        help="Specific PDF path to parse. Can be supplied multiple times.",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Process at most N PDFs after sorting.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Delete and regenerate each parsed report output directory.",
+    )
+    return parser.parse_args()
 
 
 def main() -> int:
-    raw_pdf_dir = PROJECT_ROOT / "data" / "raw_pdfs"
+    args = parse_args()
+    raw_pdf_dir = args.input_dir
     parsed_root = ensure_dir(PROJECT_ROOT / "data" / "parsed_reports")
     manifests_root = ensure_dir(PROJECT_ROOT / "data" / "manifests")
 
-    pdf_paths = sorted(raw_pdf_dir.glob("*.pdf"))
+    pdf_paths = _resolve_pdf_paths(raw_pdf_dir, args.pdf)
+    if args.limit is not None:
+        pdf_paths = pdf_paths[: max(args.limit, 0)]
+
     if not pdf_paths:
         print(f"No PDFs found under {raw_pdf_dir}")
         return 0
 
     iterator = tqdm(pdf_paths, desc="Parsing PDFs") if tqdm else pdf_paths
-    results = [process_pdf(path, parsed_root, manifests_root) for path in iterator]
+    results = [
+        process_pdf(path, parsed_root, manifests_root, force=args.force)
+        for path in iterator
+    ]
 
     parsed_count = sum(result.parsed for result in results)
     skipped_count = len(results) - parsed_count
@@ -51,6 +88,24 @@ def main() -> int:
             print(f"    warnings: {len(result.warnings)}")
 
     return 0
+
+
+def _resolve_pdf_paths(input_dir: Path, explicit_pdfs: list[Path]) -> list[Path]:
+    if explicit_pdfs:
+        paths = [path if path.is_absolute() else (PROJECT_ROOT / path) for path in explicit_pdfs]
+    else:
+        paths = find_pdf_files(input_dir if input_dir.is_absolute() else PROJECT_ROOT / input_dir)
+
+    seen: set[Path] = set()
+    unique: list[Path] = []
+    for path in paths:
+        resolved = path.resolve()
+        if resolved.suffix.lower() != ".pdf":
+            continue
+        if resolved not in seen:
+            seen.add(resolved)
+            unique.append(resolved)
+    return sorted(unique)
 
 
 if __name__ == "__main__":

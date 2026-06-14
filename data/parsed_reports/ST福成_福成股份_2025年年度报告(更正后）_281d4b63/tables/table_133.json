@@ -1,0 +1,41 @@
+{
+  "table_id": "table_133",
+  "page": 165,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    63.97000249226888,
+    554.52001953125,
+    516.8633422851562,
+    611.0900268554688
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_133.csv",
+  "json_path": "tables/table_133.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.1667,
+  "numeric_cell_ratio": 0.4,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "在建工程",
+      "8,462,426.81",
+      "8,462,426.81"
+    ],
+    [
+      "工程物资",
+      "",
+      ""
+    ],
+    [
+      "合计",
+      "8,462,426.81",
+      "8,462,426.81"
+    ]
+  ]
+}

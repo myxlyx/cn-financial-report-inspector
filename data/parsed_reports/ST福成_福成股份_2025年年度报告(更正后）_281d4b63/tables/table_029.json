@@ -1,0 +1,48 @@
+{
+  "table_id": "table_029",
+  "page": 24,
+  "rows": 3,
+  "columns": 7,
+  "bbox": [
+    82.8000005086263,
+    222.26000213623047,
+    531.1500091552734,
+    278.1400146484375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_029.csv",
+  "json_path": "tables/table_029.json",
+  "title_candidate": "单位：万元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.2381,
+  "numeric_cell_ratio": 0.375,
+  "data": [
+    [
+      "销售渠道",
+      "本年度",
+      "",
+      "",
+      "上年度",
+      "",
+      ""
+    ],
+    [
+      "",
+      "营业收入",
+      "营业收入占\n比（%）",
+      "毛利率\n（%）",
+      "营业收入",
+      "营业收入占\n比（%）",
+      "毛利率\n（%）"
+    ],
+    [
+      "线上销售",
+      "486.41",
+      "0.42",
+      "17.60",
+      "1,353.85",
+      "1.33",
+      "14.52"
+    ]
+  ]
+}

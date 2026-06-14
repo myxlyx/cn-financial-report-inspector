@@ -1,0 +1,41 @@
+{
+  "table_id": "table_165",
+  "page": 177,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    505.57000732421875,
+    542.586669921875,
+    562.1400146484375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_165.csv",
+  "json_path": "tables/table_165.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "应付股利",
+      "87,001.45",
+      "87,001.45"
+    ],
+    [
+      "其他应付款",
+      "100,516,189.96",
+      "124,238,621.60"
+    ],
+    [
+      "合计",
+      "100,603,191.41",
+      "124,325,623.05"
+    ]
+  ]
+}

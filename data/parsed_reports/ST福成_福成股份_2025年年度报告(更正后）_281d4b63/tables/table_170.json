@@ -1,0 +1,41 @@
+{
+  "table_id": "table_170",
+  "page": 179,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    84.32999801635742,
+    89.96999740600586,
+    536.9700012207031,
+    146.58999633789062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_170.csv",
+  "json_path": "tables/table_170.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "预提费用",
+      "91,642.20",
+      "437,710.57"
+    ],
+    [
+      "待转销项税",
+      "928,516.74",
+      "928,516.74"
+    ],
+    [
+      "合计",
+      "1,020,158.94",
+      "1,366,227.31"
+    ]
+  ]
+}

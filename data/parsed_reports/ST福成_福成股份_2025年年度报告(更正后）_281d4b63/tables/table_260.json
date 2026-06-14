@@ -1,0 +1,36 @@
+{
+  "table_id": "table_260",
+  "page": 228,
+  "rows": 3,
+  "columns": 3,
+  "bbox": [
+    90.0999984741211,
+    475.1400146484375,
+    535.75,
+    515.9400024414062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_260.csv",
+  "json_path": "tables/table_260.json",
+  "title_candidate": "河北福成五丰食品股份有限公司2025 年年度报告",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "报告版本号",
+      "更正、补充公告发布时间",
+      "更正、补充公告内容"
+    ],
+    [
+      "V1.0",
+      "2026.4.30",
+      "/"
+    ],
+    [
+      "V2.0",
+      "2026.5.28",
+      "股东人数及重大事项说明"
+    ]
+  ]
+}

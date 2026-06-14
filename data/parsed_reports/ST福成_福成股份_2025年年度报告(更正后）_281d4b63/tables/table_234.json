@@ -1,0 +1,31 @@
+{
+  "table_id": "table_234",
+  "page": 209,
+  "rows": 2,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    378.32000732421875,
+    542.5700073242188,
+    406.69000244140625
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_234.csv",
+  "json_path": "tables/table_234.json",
+  "title_candidate": "单位：万元",
+  "section_candidate": "2024 年6 月17 日，本公司的子公司三河福成控股有限公司投资的和辉基金与上海福犇龙企",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.3333,
+  "data": [
+    [
+      "项目",
+      "本期发生额",
+      "上期发生额"
+    ],
+    [
+      "关键管理人员报酬",
+      "372.06",
+      "437.33"
+    ]
+  ]
+}

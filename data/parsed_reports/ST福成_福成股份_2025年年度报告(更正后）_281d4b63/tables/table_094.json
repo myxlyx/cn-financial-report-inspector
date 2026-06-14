@@ -1,0 +1,37 @@
+{
+  "table_id": "table_094",
+  "page": 123,
+  "rows": 4,
+  "columns": 2,
+  "bbox": [
+    62.72000037299262,
+    432.68499755859375,
+    506.5300021701389,
+    530.6900024414062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_094.csv",
+  "json_path": "tables/table_094.json",
+  "title_candidate": "项目",
+  "section_candidate": "1 年以内（含1 年）",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "项目",
+      "计提方法"
+    ],
+    [
+      "组合1（账龄组合）",
+      "预计存续期"
+    ],
+    [
+      "组合2（信用风险极低金融资产组合）",
+      "预计存续期"
+    ],
+    [
+      "组合3（关联方组合）",
+      "预计存续期"
+    ]
+  ]
+}

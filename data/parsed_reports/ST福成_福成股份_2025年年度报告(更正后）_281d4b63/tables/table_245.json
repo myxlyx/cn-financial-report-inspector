@@ -1,0 +1,39 @@
+{
+  "table_id": "table_245",
+  "page": 220,
+  "rows": 2,
+  "columns": 7,
+  "bbox": [
+    84.25,
+    76.48999786376953,
+    537.0499877929688,
+    104.73999786376953
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_245.csv",
+  "json_path": "tables/table_245.json",
+  "title_candidate": "其中本期坏账准备收回或转回金额重要的：",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.5714,
+  "numeric_cell_ratio": 0.6667,
+  "data": [
+    [
+      "账准备",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "合计",
+      "8,358,069.46",
+      "526,171.67",
+      "390,009.85",
+      "",
+      "",
+      "8,494,231.28"
+    ]
+  ]
+}

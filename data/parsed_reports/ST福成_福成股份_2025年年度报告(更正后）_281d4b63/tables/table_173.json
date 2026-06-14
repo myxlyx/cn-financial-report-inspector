@@ -1,0 +1,33 @@
+{
+  "table_id": "table_173",
+  "page": 180,
+  "rows": 2,
+  "columns": 4,
+  "bbox": [
+    89.97999954223633,
+    738.1199951171875,
+    542.8200073242188,
+    766.3400268554688
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_173.csv",
+  "json_path": "tables/table_173.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.125,
+  "numeric_cell_ratio": 0.2857,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额",
+      "形成原因"
+    ],
+    [
+      "未决诉讼",
+      "12,975,309.10",
+      "13,050,408.41",
+      ""
+    ]
+  ]
+}

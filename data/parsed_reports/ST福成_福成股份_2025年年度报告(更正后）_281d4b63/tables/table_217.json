@@ -1,0 +1,35 @@
+{
+  "table_id": "table_217",
+  "page": 196,
+  "rows": 2,
+  "columns": 5,
+  "bbox": [
+    70.30000305175781,
+    222.94000244140625,
+    551.0,
+    278.3900146484375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_217.csv",
+  "json_path": "tables/table_217.json",
+  "title_candidate": "单位：元",
+  "section_candidate": "25 万",
+  "blank_cell_ratio": 0.1,
+  "numeric_cell_ratio": 0.3333,
+  "data": [
+    [
+      "子公司名称",
+      "少数股东持股\n比例",
+      "本期归属于少数股\n东的损益",
+      "本期向少数股东宣\n告分派的股利",
+      "期末少数股东权\n益余额"
+    ],
+    [
+      "湖南韶山天德福地陵\n园有限责任公司",
+      "20.00",
+      "-1,352,474.75",
+      "",
+      "22,962,950.91"
+    ]
+  ]
+}

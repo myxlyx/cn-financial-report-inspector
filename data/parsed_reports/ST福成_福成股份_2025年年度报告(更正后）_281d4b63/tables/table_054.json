@@ -1,0 +1,27 @@
+{
+  "table_id": "table_054",
+  "page": 65,
+  "rows": 1,
+  "columns": 4,
+  "bbox": [
+    90.0999984741211,
+    76.48999786376953,
+    542.4500122070312,
+    117.83999633789062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_054.csv",
+  "json_path": "tables/table_054.json",
+  "title_candidate": "复审报告，确定了公司肉牛养殖分公司固定资产构筑物-牛棚最终入账金额，公司已将复审报告及",
+  "section_candidate": "2026 年4 月16 日，公司审计委员会召开了审计委员会2026 年第一次会议并以通讯表决方式",
+  "blank_cell_ratio": 0.75,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "的实际使用状况和经济利益消耗方式，\n公司决定将构筑物-牛棚的折旧年限由15\n年调整为20 年。",
+      "",
+      "",
+      ""
+    ]
+  ]
+}

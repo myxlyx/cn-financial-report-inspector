@@ -1,0 +1,37 @@
+{
+  "table_id": "table_060",
+  "page": 77,
+  "rows": 4,
+  "columns": 2,
+  "bbox": [
+    89.97999954223633,
+    684.6699829101562,
+    542.6199951171875,
+    741.239990234375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_060.csv",
+  "json_path": "tables/table_060.json",
+  "title_candidate": "股份变动情况表",
+  "section_candidate": "第六节",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "截至报告期末普通股股东总数(户)",
+      "26,950"
+    ],
+    [
+      "年度报告披露日前上一月末的普通股股东总数(户)",
+      "28,847"
+    ],
+    [
+      "截至报告期末表决权恢复的优先股股东总数（户）",
+      "0"
+    ],
+    [
+      "年度报告披露日前上一月末表决权恢复的优先股股东总数（户）",
+      "0"
+    ]
+  ]
+}

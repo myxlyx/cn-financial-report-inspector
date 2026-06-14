@@ -1,0 +1,41 @@
+{
+  "table_id": "table_169",
+  "page": 178,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    639.6699829101562,
+    542.5700073242188,
+    696.239990234375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_169.csv",
+  "json_path": "tables/table_169.json",
+  "title_candidate": "单位：元",
+  "section_candidate": "1 年内到期的长期借款",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "1 年内到期的长期借款",
+      "200,000.00",
+      "0.00"
+    ],
+    [
+      "1 年内到期的租赁负债",
+      "6,894,372.74",
+      "6,322,262.44"
+    ],
+    [
+      "合计",
+      "7,094,372.74",
+      "6,322,262.44"
+    ]
+  ]
+}

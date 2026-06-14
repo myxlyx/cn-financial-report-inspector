@@ -1,0 +1,36 @@
+{
+  "table_id": "table_126",
+  "page": 159,
+  "rows": 3,
+  "columns": 3,
+  "bbox": [
+    63.930002212524414,
+    310.9700012207031,
+    516.5450134277344,
+    353.44000244140625
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_126.csv",
+  "json_path": "tables/table_126.json",
+  "title_candidate": "(4).存货期末余额含有的借款费用资本化金额及其计算标准和依据",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.2222,
+  "numeric_cell_ratio": 0.2857,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "一年内到期的长期待摊费用",
+      "",
+      "61,853.79"
+    ],
+    [
+      "合计",
+      "",
+      "61,853.79"
+    ]
+  ]
+}

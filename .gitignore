@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+*.egg-info/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
@@ -16,7 +17,9 @@ data/raw_pdfs/*.PDF
 data/parsed_reports/*
 data/manifests/*
 !data/raw_pdfs/.gitkeep
+!data/raw_pdfs/_ST福成：福成股份：2025年年度报告(更正后）.pdf
 !data/parsed_reports/.gitkeep
+!data/parsed_reports/ST福成_福成股份_2025年年度报告(更正后）_281d4b63/
+!data/parsed_reports/ST福成_福成股份_2025年年度报告(更正后）_281d4b63/**
 !data/manifests/.gitkeep
-!data/sample_reports/
-!data/sample_reports/**
+!data/manifests/ST福成_福成股份_2025年年度报告(更正后）_281d4b63.json

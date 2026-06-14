@@ -1,0 +1,39 @@
+{
+  "table_id": "table_100",
+  "page": 133,
+  "rows": 3,
+  "columns": 4,
+  "bbox": [
+    64.97000122070312,
+    72.30666732788086,
+    504.2466735839844,
+    124.73999786376953
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_100.csv",
+  "json_path": "tables/table_100.json",
+  "title_candidate": "本公司的无形资产按实际支付的金额或确定的价值入账。",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "资产类别",
+      "预计使用寿命（年）",
+      "预计净残值率（%）",
+      "年折旧率（%）"
+    ],
+    [
+      "成熟性繁殖母牛",
+      "6",
+      "30",
+      "11.67"
+    ],
+    [
+      "成熟性繁殖公牛",
+      "8",
+      "5",
+      "11.88"
+    ]
+  ]
+}

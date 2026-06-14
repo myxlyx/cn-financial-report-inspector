@@ -1,0 +1,37 @@
+{
+  "table_id": "table_040",
+  "page": 39,
+  "rows": 4,
+  "columns": 2,
+  "bbox": [
+    89.97999954223633,
+    536.9199829101562,
+    542.5950012207031,
+    593.489990234375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_040.csv",
+  "json_path": "tables/table_040.json",
+  "title_candidate": "河北福成五丰食品股份有限公司2025 年年度报告",
+  "section_candidate": "四、董事履行职责情况",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "年内召开董事会会议次数",
+      "8"
+    ],
+    [
+      "其中：现场会议次数",
+      "1"
+    ],
+    [
+      "通讯方式召开会议次数",
+      "3"
+    ],
+    [
+      "现场结合通讯方式召开会议次数",
+      "4"
+    ]
+  ]
+}

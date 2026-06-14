@@ -1,0 +1,41 @@
+{
+  "table_id": "table_186",
+  "page": 185,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.40999984741211,
+    76.36999893188477,
+    542.6074981689453,
+    132.94000244140625
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_186.csv",
+  "json_path": "tables/table_186.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.6667,
+  "data": [
+    [
+      "资产摊销费",
+      "4,442,813.93",
+      "8,999,875.40"
+    ],
+    [
+      "物料消耗",
+      "1,309,475.01",
+      "1,376,984.72"
+    ],
+    [
+      "其他",
+      "8,269,152.99",
+      "5,505,790.73"
+    ],
+    [
+      "合计",
+      "116,609,083.27",
+      "129,029,661.67"
+    ]
+  ]
+}

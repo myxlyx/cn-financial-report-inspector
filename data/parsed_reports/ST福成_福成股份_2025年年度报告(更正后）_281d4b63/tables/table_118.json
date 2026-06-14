@@ -1,0 +1,31 @@
+{
+  "table_id": "table_118",
+  "page": 156,
+  "rows": 2,
+  "columns": 3,
+  "bbox": [
+    63.96857288905552,
+    72.11999893188477,
+    516.7242954799107,
+    100.48999786376953
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_118.csv",
+  "json_path": "tables/table_118.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.6667,
+  "data": [
+    [
+      "其他",
+      "145,128.22",
+      "21,649,108.15"
+    ],
+    [
+      "合计",
+      "48,883,283.96",
+      "63,339,414.96"
+    ]
+  ]
+}

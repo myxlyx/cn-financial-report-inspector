@@ -1,0 +1,41 @@
+{
+  "table_id": "table_104",
+  "page": 146,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    63.930002212524414,
+    241.4199981689453,
+    516.9199829101562,
+    298.0400085449219
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_104.csv",
+  "json_path": "tables/table_104.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.3333,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "银行承兑票据",
+      "267,628.76",
+      "355,646.99"
+    ],
+    [
+      "商业承兑票据",
+      "/",
+      "/"
+    ],
+    [
+      "合计",
+      "267,628.76",
+      "355,646.99"
+    ]
+  ]
+}

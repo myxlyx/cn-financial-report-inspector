@@ -1,0 +1,41 @@
+{
+  "table_id": "table_047",
+  "page": 44,
+  "rows": 5,
+  "columns": 2,
+  "bbox": [
+    89.97999954223633,
+    321.32000732421875,
+    542.7449951171875,
+    405.6400146484375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_047.csv",
+  "json_path": "tables/table_047.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "是否符合公司章程的规定或股东会决议的要求",
+      "√是 □否"
+    ],
+    [
+      "分红标准和比例是否明确和清晰",
+      "√是 □否"
+    ],
+    [
+      "相关的决策程序和机制是否完备",
+      "√是 □否"
+    ],
+    [
+      "独立董事是否履职尽责并发挥了应有的作用",
+      "√是 □否"
+    ],
+    [
+      "中小股东是否有充分表达意见和诉求的机会，其合法权益是否得到了充分\n保护",
+      "√是 □否"
+    ]
+  ]
+}

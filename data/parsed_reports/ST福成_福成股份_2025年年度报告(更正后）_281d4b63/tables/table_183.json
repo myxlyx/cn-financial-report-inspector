@@ -1,0 +1,36 @@
+{
+  "table_id": "table_183",
+  "page": 184,
+  "rows": 3,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    76.36999893188477,
+    515.02001953125,
+    118.83999633789062
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_183.csv",
+  "json_path": "tables/table_183.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.1111,
+  "numeric_cell_ratio": 0.625,
+  "data": [
+    [
+      "在某一时点确认收入",
+      "1,126,316,310.78",
+      "881,302,773.02"
+    ],
+    [
+      "在某一时段确认收入",
+      "1,265,252.01",
+      ""
+    ],
+    [
+      "合计",
+      "1,127,581,562.79",
+      "881,302,773.02"
+    ]
+  ]
+}

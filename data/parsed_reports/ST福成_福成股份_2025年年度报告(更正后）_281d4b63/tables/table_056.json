@@ -1,0 +1,31 @@
+{
+  "table_id": "table_056",
+  "page": 66,
+  "rows": 2,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    632.6699829101562,
+    542.6699829101562,
+    674.6400146484375
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_056.csv",
+  "json_path": "tables/table_056.json",
+  "title_candidate": "单位：元",
+  "section_candidate": "2026 年4 月16 日，公司审计委员会召开了审计委员会2026 年第一次会议并以通讯表决方式",
+  "blank_cell_ratio": 0.1667,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "",
+      "名称",
+      "报酬"
+    ],
+    [
+      "内部控制审计会计师事务所",
+      "深圳市泓毅会计师事务所（特殊普通\n合伙）",
+      "40 万"
+    ]
+  ]
+}

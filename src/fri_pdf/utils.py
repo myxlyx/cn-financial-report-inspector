@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
 from pathlib import Path
 from typing import Iterable
 
@@ -14,10 +15,16 @@ def ensure_dir(path: Path) -> Path:
     return path
 
 
+def reset_dir(path: Path) -> Path:
+    if path.exists():
+        shutil.rmtree(path)
+    return ensure_dir(path)
+
+
 def slugify_filename(path: Path, max_base_len: int = 80) -> str:
     """Create a filesystem-safe report id from a possibly Chinese filename."""
     stem = path.stem.strip()
-    cleaned = re.sub(r"[\\/:*?\"<>|]+", "_", stem)
+    cleaned = re.sub(r"[\\/:*?\"<>|：]+", "_", stem)
     cleaned = re.sub(r"\s+", "_", cleaned).strip("._ ")
     if not cleaned:
         cleaned = "report"
@@ -39,6 +46,17 @@ def write_jsonl(path: Path, rows: Iterable[dict]) -> None:
     with path.open("w", encoding="utf-8", newline="\n") as f:
         for row in rows:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def find_pdf_files(input_dir: Path) -> list[Path]:
+    """Find PDFs in a directory using a case-insensitive suffix check."""
+    if not input_dir.exists():
+        return []
+    return sorted(
+        path
+        for path in input_dir.iterdir()
+        if path.is_file() and path.suffix.lower() == ".pdf"
+    )
 
 
 def relative_to_report(path: Path, report_dir: Path) -> str:

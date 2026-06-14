@@ -1,0 +1,29 @@
+{
+  "table_id": "table_090",
+  "page": 121,
+  "rows": 2,
+  "columns": 2,
+  "bbox": [
+    62.04750061035156,
+    72.11999893188477,
+    508.689998626709,
+    117.48999786376953
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_090.csv",
+  "json_path": "tables/table_090.json",
+  "title_candidate": "单项评估信用风险的金融资产，本公司选择始终按照相当于存续期内预期信用损失的金额计",
+  "section_candidate": "1 年以内（含1 年）",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "组合2（信用风险极低金融资产组\n合）",
+      "预计存续期"
+    ],
+    [
+      "组合3（关联方组合）",
+      "预计存续期"
+    ]
+  ]
+}

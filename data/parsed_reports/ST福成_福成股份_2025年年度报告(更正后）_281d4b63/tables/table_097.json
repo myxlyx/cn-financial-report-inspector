@@ -1,0 +1,33 @@
+{
+  "table_id": "table_097",
+  "page": 130,
+  "rows": 2,
+  "columns": 4,
+  "bbox": [
+    65.24400253295899,
+    72.30666732788086,
+    503.09665934244794,
+    121.54000091552734
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_097.csv",
+  "json_path": "tables/table_097.json",
+  "title_candidate": "本公司有确凿证据表明房地产用途发生改变，将投资性房地产转换为自用房地产或存货时，",
+  "section_candidate": "5 年",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.125,
+  "data": [
+    [
+      "类别",
+      "预计使用寿命（年）",
+      "预计净残值率",
+      "年折旧（摊销）\n率"
+    ],
+    [
+      "房屋建筑物",
+      "15-20",
+      "0.00",
+      "6.67-5.00"
+    ]
+  ]
+}

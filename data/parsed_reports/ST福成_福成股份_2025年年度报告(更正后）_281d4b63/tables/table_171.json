@@ -1,0 +1,41 @@
+{
+  "table_id": "table_171",
+  "page": 179,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    320.7200012207031,
+    542.6199951171875,
+    377.3399963378906
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_171.csv",
+  "json_path": "tables/table_171.json",
+  "title_candidate": "单位：元",
+  "section_candidate": null,
+  "blank_cell_ratio": 0.0833,
+  "numeric_cell_ratio": 0.4545,
+  "data": [
+    [
+      "项目",
+      "期末余额",
+      "期初余额"
+    ],
+    [
+      "保证借款",
+      "100,000,000.00",
+      "0.00"
+    ],
+    [
+      "减：一年内到期的长期借款",
+      "200,000.00",
+      ""
+    ],
+    [
+      "合计",
+      "99,800,000.00",
+      "0.00"
+    ]
+  ]
+}

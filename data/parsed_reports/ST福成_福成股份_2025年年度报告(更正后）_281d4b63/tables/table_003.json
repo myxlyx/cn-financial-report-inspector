@@ -1,0 +1,41 @@
+{
+  "table_id": "table_003",
+  "page": 6,
+  "rows": 5,
+  "columns": 2,
+  "bbox": [
+    89.68833287556966,
+    127.02000045776367,
+    534.4700073242187,
+    202.88999938964844
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_003.csv",
+  "json_path": "tables/table_003.json",
+  "title_candidate": "公司的法定代表人",
+  "section_candidate": "第二节",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.0,
+  "data": [
+    [
+      "公司的中文名称",
+      "河北福成五丰食品股份有限公司"
+    ],
+    [
+      "公司的中文简称",
+      "福成股份"
+    ],
+    [
+      "公司的外文名称",
+      "Fortune Ng Fung Food (Hebei) Co.,Ltd"
+    ],
+    [
+      "公司的外文名称缩写",
+      "Fortune"
+    ],
+    [
+      "公司的法定代表人",
+      "李良"
+    ]
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "table_id": "table_194",
+  "page": 186,
+  "rows": 4,
+  "columns": 3,
+  "bbox": [
+    89.97999954223633,
+    539.02001953125,
+    542.5700073242188,
+    595.5900268554688
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_194.csv",
+  "json_path": "tables/table_194.json",
+  "title_candidate": "单位：元",
+  "section_candidate": "二、存货跌价损失及合同履约成本减值",
+  "blank_cell_ratio": 0.0,
+  "numeric_cell_ratio": 0.5,
+  "data": [
+    [
+      "项目",
+      "本期发生额",
+      "上期发生额"
+    ],
+    [
+      "应收账款坏账损失",
+      "-163,110.98",
+      "478,007.72"
+    ],
+    [
+      "其他应收款坏账损失",
+      "148,861.84",
+      "-510,866.59"
+    ],
+    [
+      "合计",
+      "-14,249.14",
+      "-32,858.87"
+    ]
+  ]
+}
