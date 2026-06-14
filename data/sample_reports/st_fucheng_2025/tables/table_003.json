@@ -1,0 +1,14 @@
+{
+  "table_id": "table_003",
+  "page": 6,
+  "rows": 5,
+  "columns": 2,
+  "bbox": [
+    89.68833287556966,
+    127.02000045776367,
+    534.4700073242187,
+    202.88999938964844
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_003.csv"
+}

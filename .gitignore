@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+env/
+.env
+.DS_Store
+Thumbs.db
+
+# Keep full datasets local by default. GitHub only tracks compact examples.
+data/raw_pdfs/*.pdf
+data/raw_pdfs/*.PDF
+data/parsed_reports/*
+data/manifests/*
+!data/raw_pdfs/.gitkeep
+!data/parsed_reports/.gitkeep
+!data/manifests/.gitkeep
+!data/sample_reports/
+!data/sample_reports/**

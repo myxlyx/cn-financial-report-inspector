@@ -1,0 +1,11 @@
+{
+  "report_id": "ST福成：福成股份：2025年年度报告(更正后）_281d4b63",
+  "source_pdf": "D:\\code\\pycode2\\cn-financial-report-inspector\\data\\raw_pdfs\\_ST福成：福成股份：2025年年度报告(更正后）.pdf",
+  "pdf_type": "text_based",
+  "page_count": 228,
+  "markdown_path": "report.md",
+  "pages_jsonl_path": "pages.jsonl",
+  "tables_count": 260,
+  "tables_dir": "tables",
+  "parse_warnings": []
+}
