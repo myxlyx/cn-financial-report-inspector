@@ -1,0 +1,42 @@
+{
+  "table_id": "table_006",
+  "page": 6,
+  "rows": 3,
+  "columns": 5,
+  "bbox": [
+    89.68833287556966,
+    619.2200012207031,
+    534.4700073242187,
+    664.9100036621094
+  ],
+  "source_method": "pymupdf_find_tables",
+  "csv_path": "tables/table_006.csv",
+  "json_path": "tables/table_006.json",
+  "title_candidate": "公司的法定代表人",
+  "section_candidate": "第二节",
+  "blank_cell_ratio": 0.2667,
+  "numeric_cell_ratio": 0.0909,
+  "data": [
+    [
+      "公司股票简况",
+      "",
+      "",
+      "",
+      ""
+    ],
+    [
+      "股票种类",
+      "股票上市交易所",
+      "股票简称",
+      "股票代码",
+      "变更前股票简称"
+    ],
+    [
+      "A股",
+      "上海证券交易所",
+      "福成股份",
+      "600965",
+      "福成五丰"
+    ]
+  ]
+}

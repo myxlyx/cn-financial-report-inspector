@@ -80,12 +80,7 @@ def run_all_reports(
     mapper: BaseSemanticMapper | None = None,
 ) -> list[CheckSummary]:
     parsed_dir = parsed_dir.resolve()
-    if report_id:
-        report_dirs = [parsed_dir / report_id]
-    elif parsed_dir.exists():
-        report_dirs = sorted(path for path in parsed_dir.iterdir() if path.is_dir())
-    else:
-        report_dirs = []
+    report_dirs = _discover_report_dirs(parsed_dir, report_id=report_id)
 
     summaries: list[CheckSummary] = []
     for report_dir in report_dirs:
@@ -101,6 +96,25 @@ def run_all_reports(
             )
         )
     return summaries
+
+
+def _discover_report_dirs(parsed_dir: Path, report_id: str | None) -> list[Path]:
+    if not parsed_dir.exists():
+        return []
+
+    index_paths = set(parsed_dir.rglob("tables_index.jsonl"))
+    direct_index = parsed_dir / "tables_index.jsonl"
+    if direct_index.exists():
+        index_paths.add(direct_index)
+    report_dirs = sorted(path.parent for path in index_paths)
+    if report_id:
+        matches = [path for path in report_dirs if path.name == report_id]
+        if not matches:
+            raise FileNotFoundError(
+                f"Report directory not found under {parsed_dir}: {report_id}"
+            )
+        return matches
+    return report_dirs
 
 
 def _load_table(report_dir: Path, record: dict) -> dict:

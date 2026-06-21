@@ -1,0 +1,20 @@
+{
+  "report_id": "growth_rate_mutation_002",
+  "source_pdf": "data/raw_pdfs/_ST福成：福成股份：2025年年度报告(更正后）.pdf",
+  "pdf_type": "text_based",
+  "page_count": 228,
+  "markdown_path": null,
+  "pages_jsonl_path": null,
+  "tables_count": 9,
+  "tables_dir": "tables",
+  "tables_index_path": "tables_index.jsonl",
+  "parse_quality_path": "parse_quality.json",
+  "parse_warnings": [
+    "Table extraction mode 'candidate' selected 3 of 228 pages; skipped 225 non-candidate pages."
+  ],
+  "source_report_id": "ST福成_福成股份_2025年年度报告(更正后）_281d4b63",
+  "is_mutated": true,
+  "mutation_id": "growth_rate_mutation_002",
+  "mutation_type": "growth_rate_reported_value_error",
+  "source_pdf_unmodified": true
+}

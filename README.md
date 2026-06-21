@@ -9,11 +9,11 @@ tags:
 
 # cn-financial-report-inspector
 
-`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system. The current project contains a stable PDF processing module and one narrowly scoped deterministic financial check.
+`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system. The current project contains a stable PDF processing module, one narrowly scoped deterministic financial check, and JSON-level mutation samples for that check.
 
 ## Current Scope
 
-The PDF module converts text-based Chinese financial report PDFs into clean intermediate files. Financial checks v0.1 uses those files to verify reported growth rates in annual key financial metric tables.
+The PDF module converts text-based Chinese financial report PDFs into clean intermediate files. Financial checks v0.1 uses those files to verify reported growth rates in annual key financial metric tables. Mutation samples v0.1 introduces labeled errors only in copied table JSON data.
 
 This stage does not implement:
 
@@ -45,6 +45,7 @@ To make the repository useful for code review and web-based analysis, GitHub tra
 data/raw_pdfs/
 data/manifests/
 data/parsed_reports/
+data/mutated_reports/
 ```
 
 Other full local inputs and generated outputs under these directories are ignored by Git. The tracked example shows the expected manifest, metadata, parse quality report, page JSONL, Markdown, table index, and table CSV/JSON formats.
@@ -228,6 +229,38 @@ data/parsed_reports/<report_id>/checks/
 
 This is only a consistency check for one reported growth-rate formula. It is not a complete financial audit, semantic table classifier, or AI error-detection system. Rows reported as percentage-point changes are intentionally not evaluated with the growth-rate formula.
 
+## Growth-rate Mutation Samples v0.1
+
+Mutation samples are created from parsed table JSON, never from the original PDF. Version 0.1 changes only the disclosed growth-rate cell; current-year and previous-year values remain unchanged.
+
+Run mutation generation after the source growth-rate checks exist:
+
+```bash
+python scripts/generate_growth_rate_mutations.py \
+  --parsed-dir data/parsed_reports \
+  --output-dir data/mutated_reports \
+  --max-mutations-per-report 3 \
+  --strategy add_delta \
+  --force
+```
+
+Supported deterministic strategies are `add_delta`, `replace_with_zero`, and `swap_sign`. Each mutation directory contains a ground-truth `mutation_label.json`, a summary, copied table JSON data, and fresh checker outputs:
+
+```text
+data/mutated_reports/<source_report_id>/growth_rate_mutation_001/
+  tables_index.jsonl
+  tables/*.json
+  metadata.json
+  parse_quality.json
+  mutation_label.json
+  mutation_summary.json
+  checks/
+    growth_rate_checks.jsonl
+    growth_rate_summary.json
+```
+
+The existing checker runs after every mutation. The label records whether the target was detected as `mismatch` with `review_required=true`. This stage does not edit PDFs or generate synthetic PDFs.
+
 ## Current Limitations
 
 - No OCR is performed.
@@ -237,3 +270,4 @@ This is only a consistency check for one reported growth-rate formula. It is not
 - Extracted text is page-level plain text, not a semantic document hierarchy.
 - Financial checks v0.1 depends on recognizable annual key-metric table headers.
 - Ambiguous mappings are marked for future semantic mapping instead of calling an LLM.
+- Mutation samples v0.1 only target reported growth-rate cells in table JSON.

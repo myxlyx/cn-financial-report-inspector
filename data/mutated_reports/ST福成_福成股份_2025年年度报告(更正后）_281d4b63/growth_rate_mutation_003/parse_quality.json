@@ -1,0 +1,30 @@
+{
+  "report_id": "growth_rate_mutation_003",
+  "page_count": 228,
+  "total_text_chars": 194531,
+  "avg_text_chars_per_page": 853.21,
+  "min_text_chars_per_page": 80,
+  "max_text_chars_per_page": 1894,
+  "empty_pages_count": 0,
+  "empty_pages": [],
+  "short_text_pages_count": 0,
+  "short_text_pages": [],
+  "tables_count": 9,
+  "pages_with_tables": [
+    4,
+    6,
+    7
+  ],
+  "chinese_char_ratio": 0.6656,
+  "garbled_char_ratio": 0.0045,
+  "quality_level": "good",
+  "recommended_for_dataset": true,
+  "warnings_count": 1,
+  "warnings": [
+    "Table extraction mode 'candidate' selected 3 of 228 pages; skipped 225 non-candidate pages."
+  ],
+  "source_report_id": "ST福成_福成股份_2025年年度报告(更正后）_281d4b63",
+  "is_mutated": true,
+  "mutation_id": "growth_rate_mutation_003",
+  "mutation_type": "growth_rate_reported_value_error"
+}

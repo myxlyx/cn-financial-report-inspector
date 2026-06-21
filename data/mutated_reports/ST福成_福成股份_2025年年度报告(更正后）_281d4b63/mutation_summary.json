@@ -1,0 +1,11 @@
+{
+  "source_report_id": "ST福成_福成股份_2025年年度报告(更正后）_281d4b63",
+  "mutations_count": 3,
+  "mutation_ids": [
+    "growth_rate_mutation_001",
+    "growth_rate_mutation_002",
+    "growth_rate_mutation_003"
+  ],
+  "validation_detected_count": 3,
+  "skipped_candidates_count": 0
+}

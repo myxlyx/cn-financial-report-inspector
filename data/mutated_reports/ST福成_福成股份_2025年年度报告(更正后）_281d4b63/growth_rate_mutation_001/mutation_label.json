@@ -1,0 +1,39 @@
+{
+  "mutation_id": "growth_rate_mutation_001",
+  "source_report_id": "ST福成_福成股份_2025年年度报告(更正后）_281d4b63",
+  "mutation_type": "growth_rate_reported_value_error",
+  "strategy": "add_delta",
+  "target": {
+    "table_id": "table_008",
+    "page": 7,
+    "row_index": 1,
+    "item_name": "营业收入",
+    "reported_cell": 3,
+    "reported_cell_coord": [
+      1,
+      3
+    ]
+  },
+  "original": {
+    "reported_growth_rate_raw": "13.80",
+    "computed_growth_rate": "13.80"
+  },
+  "mutated": {
+    "reported_growth_rate_raw": "18.80"
+  },
+  "expected_detection": {
+    "status": "mismatch",
+    "review_required": true,
+    "should_detect": true
+  },
+  "validation": {
+    "detected": true,
+    "matched_check_result": {
+      "table_id": "table_008",
+      "row_index": 1,
+      "item_name": "营业收入",
+      "status": "mismatch",
+      "review_required": true
+    }
+  }
+}
