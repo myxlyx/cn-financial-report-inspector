@@ -9,18 +9,18 @@ tags:
 
 # cn-financial-report-inspector
 
-`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system, but this stage intentionally focuses only on the PDF processing module.
+`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system. The current project contains a stable PDF processing module and one narrowly scoped deterministic financial check.
 
 ## Current Scope
 
-The MVP converts text-based Chinese financial report PDFs into clean intermediate files for later table checking, RAG indexing, and synthetic error construction.
+The PDF module converts text-based Chinese financial report PDFs into clean intermediate files. Financial checks v0.1 uses those files to verify reported growth rates in annual key financial metric tables.
 
 This stage does not implement:
 
 - RAG
 - Agent workflows
 - Law or regulation knowledge graphs
-- Financial error detection
+- AI-based or general-purpose financial error detection
 - OCR
 
 Scanned PDFs or badly parsed PDFs are intentionally detected and excluded in stage 1.
@@ -105,6 +105,9 @@ data/
       tables/
         table_001.csv
         table_001.json
+      checks/
+        growth_rate_checks.jsonl
+        growth_rate_summary.json
 ```
 
 Manifest example:
@@ -182,6 +185,39 @@ PDFs are classified as:
 
 Only `text_based` PDFs are fully parsed.
 
+## Financial Checks v0.1
+
+This first check identifies tables related to `近三年主要会计数据和财务指标`, maps the item, current-year, previous-year, and reported growth-rate columns, and creates structured calculation tasks.
+
+No LLM or LLM API is used. Rule-based mapping produces the tasks, and Python `Decimal` performs the calculation:
+
+```text
+growth_rate = (current - previous) / abs(previous) * 100
+```
+
+Run checks for all parsed reports:
+
+```bash
+python scripts/run_growth_rate_checks.py --parsed-dir data/parsed_reports
+```
+
+Useful options:
+
+```bash
+python scripts/run_growth_rate_checks.py --report-id <report_id>
+python scripts/run_growth_rate_checks.py --tolerance 0.05
+```
+
+Each report receives:
+
+```text
+data/parsed_reports/<report_id>/checks/
+  growth_rate_checks.jsonl
+  growth_rate_summary.json
+```
+
+This is only a consistency check for one reported growth-rate formula. It is not a complete financial audit, semantic table classifier, or AI error-detection system. Rows reported as percentage-point changes are intentionally not evaluated with the growth-rate formula.
+
 ## Current Limitations
 
 - No OCR is performed.
@@ -189,3 +225,5 @@ Only `text_based` PDFs are fully parsed.
 - Table extraction uses PyMuPDF `page.find_tables()` on a best-effort basis.
 - Table extraction quality depends on the PDF layout and installed PyMuPDF version.
 - Extracted text is page-level plain text, not a semantic document hierarchy.
+- Financial checks v0.1 depends on recognizable annual key-metric table headers.
+- Ambiguous mappings are marked for future semantic mapping instead of calling an LLM.
