@@ -261,6 +261,30 @@ data/mutated_reports/<source_report_id>/growth_rate_mutation_001/
 
 The existing checker runs after every mutation. The label records whether the target was detected as `mismatch` with `review_required=true`. This stage does not edit PDFs or generate synthetic PDFs.
 
+## Batch Evaluation Workflow
+
+User-provided PDFs are copied into a named directory under `data/raw_reports/` before running the existing deterministic pipeline. The parser itself is not extended with a separate user-upload interface.
+
+Example workflow:
+
+```bash
+python scripts/parse_pdfs.py --input-dir data/raw_reports/user_offer_01 --table-mode candidate --force
+python scripts/run_growth_rate_checks.py --parsed-dir data/parsed_reports
+python scripts/generate_growth_rate_mutations.py --parsed-dir data/parsed_reports --output-dir data/mutated_reports --max-mutations-per-report 3 --strategy add_delta --force
+python scripts/run_growth_rate_checks.py --parsed-dir data/mutated_reports
+python scripts/summarize_batch_results.py --parsed-dir data/parsed_reports --mutated-dir data/mutated_reports --source-dir data/raw_reports/user_offer_01 --output data/batch_reports/user_offer_01_summary.md
+```
+
+The summarizer filters parsed reports by the `source_pdf` path prefix, so unrelated historical samples are excluded. It creates:
+
+```text
+data/batch_reports/user_offer_01_summary.md
+data/batch_reports/user_offer_01_summary.json
+data/batch_reports/user_offer_01_inputs.json
+```
+
+This workflow evaluates only the current parsing, deterministic growth-rate check, and JSON mutation pipeline. It does not use an LLM or RAG, and the summary does not establish that a financial report is correct.
+
 ## Current Limitations
 
 - No OCR is performed.

@@ -1,0 +1,354 @@
+{
+  "batch_name": "user_offer_01",
+  "pdf_source_dir": "data/raw_reports/user_offer_01",
+  "overview": {
+    "total_pdfs_found": 10,
+    "parsed_reports": 10,
+    "text_based_pdfs_parsed": 10,
+    "skipped_pdfs": 0,
+    "parse_failed_pdfs": 0,
+    "reports_with_checks": 6,
+    "reports_without_checks": 4,
+    "total_growth_rate_checks": 50,
+    "ok_checks": 37,
+    "mismatch_checks": 0,
+    "review_required_checks": 0,
+    "mutations_generated": 16,
+    "mutations_detected": 16
+  },
+  "reports": [
+    {
+      "report_id": "000034_digitalchina_2025_annual_report_fdad6d3c",
+      "source_pdf": "data/raw_reports/user_offer_01/000034_digitalchina_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 283,
+      "text_pages": 283,
+      "tables_count": 20,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 1,
+      "checks_count": 0,
+      "ok_count": 0,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 1,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "000926_fuxing_2025_annual_report_79c79b2f",
+      "source_pdf": "data/raw_reports/user_offer_01/000926_fuxing_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 197,
+      "text_pages": 196,
+      "tables_count": 21,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 0,
+      "checks_count": 0,
+      "ok_count": 0,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "000983_shanxijiaomei_2025_annual_report_ba60ae1a",
+      "source_pdf": "data/raw_reports/user_offer_01/000983_shanxijiaomei_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 254,
+      "text_pages": 253,
+      "tables_count": 19,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 1,
+      "checks_count": 0,
+      "ok_count": 0,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 1,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "300277_hailianxun_2025_annual_report_c2be3488",
+      "source_pdf": "data/raw_reports/user_offer_01/300277_hailianxun_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 198,
+      "text_pages": 198,
+      "tables_count": 25,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 1,
+      "checks_count": 0,
+      "ok_count": 0,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 1,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "600169_taiyuanheavy_2025_annual_report_590e48ac",
+      "source_pdf": "data/raw_reports/user_offer_01/600169_taiyuanheavy_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 229,
+      "text_pages": 229,
+      "tables_count": 8,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 2,
+      "checks_count": 10,
+      "ok_count": 10,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "600965_fucheng_2025_annual_report_be5c235f",
+      "source_pdf": "data/raw_reports/user_offer_01/600965_fucheng_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 228,
+      "text_pages": 228,
+      "tables_count": 9,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 2,
+      "checks_count": 10,
+      "ok_count": 10,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "601212_baiyin_2025_annual_report_2e832fe9",
+      "source_pdf": "data/raw_reports/user_offer_01/601212_baiyin_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 281,
+      "text_pages": 281,
+      "tables_count": 13,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 2,
+      "checks_count": 8,
+      "ok_count": 8,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 0
+    },
+    {
+      "report_id": "688158_ucloud_2025_annual_report_75aa8f8a",
+      "source_pdf": "data/raw_reports/user_offer_01/688158_ucloud_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 303,
+      "text_pages": 303,
+      "tables_count": 13,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 3,
+      "checks_count": 10,
+      "ok_count": 5,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 5
+    },
+    {
+      "report_id": "688353_huashenglithium_2025_annual_report_9a6f0977",
+      "source_pdf": "data/raw_reports/user_offer_01/688353_huashenglithium_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 305,
+      "text_pages": 305,
+      "tables_count": 11,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 3,
+      "checks_count": 11,
+      "ok_count": 3,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 8
+    },
+    {
+      "report_id": "871626_weili_2025_annual_report_426cd375",
+      "source_pdf": "data/raw_reports/user_offer_01/871626_weili_2025_annual_report.pdf",
+      "pdf_type": "text_based",
+      "parse_status": "parsed",
+      "page_count": 158,
+      "text_pages": 157,
+      "tables_count": 20,
+      "quality_level": "good",
+      "recommended_for_dataset": true,
+      "parse_warnings_count": 1,
+      "candidate_tables": 1,
+      "checks_count": 1,
+      "ok_count": 1,
+      "mismatch_count": 0,
+      "review_required_count": 0,
+      "mapping_failed_count": 0,
+      "not_applicable_count": 0
+    }
+  ],
+  "mutations": [
+    {
+      "source_report_id": "000034_digitalchina_2025_annual_report_fdad6d3c",
+      "mutations_count": 0,
+      "detected_count": 0,
+      "undetected_count": 0,
+      "strategies_used": [],
+      "mutation_ids": []
+    },
+    {
+      "source_report_id": "000926_fuxing_2025_annual_report_79c79b2f",
+      "mutations_count": 0,
+      "detected_count": 0,
+      "undetected_count": 0,
+      "strategies_used": [],
+      "mutation_ids": []
+    },
+    {
+      "source_report_id": "000983_shanxijiaomei_2025_annual_report_ba60ae1a",
+      "mutations_count": 0,
+      "detected_count": 0,
+      "undetected_count": 0,
+      "strategies_used": [],
+      "mutation_ids": []
+    },
+    {
+      "source_report_id": "300277_hailianxun_2025_annual_report_c2be3488",
+      "mutations_count": 0,
+      "detected_count": 0,
+      "undetected_count": 0,
+      "strategies_used": [],
+      "mutation_ids": []
+    },
+    {
+      "source_report_id": "600169_taiyuanheavy_2025_annual_report_590e48ac",
+      "mutations_count": 3,
+      "detected_count": 3,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001",
+        "growth_rate_mutation_002",
+        "growth_rate_mutation_003"
+      ]
+    },
+    {
+      "source_report_id": "600965_fucheng_2025_annual_report_be5c235f",
+      "mutations_count": 3,
+      "detected_count": 3,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001",
+        "growth_rate_mutation_002",
+        "growth_rate_mutation_003"
+      ]
+    },
+    {
+      "source_report_id": "601212_baiyin_2025_annual_report_2e832fe9",
+      "mutations_count": 3,
+      "detected_count": 3,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001",
+        "growth_rate_mutation_002",
+        "growth_rate_mutation_003"
+      ]
+    },
+    {
+      "source_report_id": "688158_ucloud_2025_annual_report_75aa8f8a",
+      "mutations_count": 3,
+      "detected_count": 3,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001",
+        "growth_rate_mutation_002",
+        "growth_rate_mutation_003"
+      ]
+    },
+    {
+      "source_report_id": "688353_huashenglithium_2025_annual_report_9a6f0977",
+      "mutations_count": 3,
+      "detected_count": 3,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001",
+        "growth_rate_mutation_002",
+        "growth_rate_mutation_003"
+      ]
+    },
+    {
+      "source_report_id": "871626_weili_2025_annual_report_426cd375",
+      "mutations_count": 1,
+      "detected_count": 1,
+      "undetected_count": 0,
+      "strategies_used": [
+        "add_delta"
+      ],
+      "mutation_ids": [
+        "growth_rate_mutation_001"
+      ]
+    }
+  ],
+  "problem_cases": [
+    {
+      "report_id": "000034_digitalchina_2025_annual_report_fdad6d3c",
+      "issue": "no_growth_rate_checks",
+      "suggestion": "Need manual inspection: no growth-rate checks generated."
+    },
+    {
+      "report_id": "000926_fuxing_2025_annual_report_79c79b2f",
+      "issue": "no_candidate_table",
+      "suggestion": "Need manual inspection: no candidate annual key metrics table found."
+    },
+    {
+      "report_id": "000926_fuxing_2025_annual_report_79c79b2f",
+      "issue": "no_growth_rate_checks",
+      "suggestion": "Need manual inspection: no growth-rate checks generated."
+    },
+    {
+      "report_id": "000983_shanxijiaomei_2025_annual_report_ba60ae1a",
+      "issue": "no_growth_rate_checks",
+      "suggestion": "Need manual inspection: no growth-rate checks generated."
+    },
+    {
+      "report_id": "300277_hailianxun_2025_annual_report_c2be3488",
+      "issue": "no_growth_rate_checks",
+      "suggestion": "Need manual inspection: no growth-rate checks generated."
+    }
+  ]
+}
