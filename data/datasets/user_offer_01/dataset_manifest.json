@@ -1,0 +1,21 @@
+{
+  "dataset_name": "user_offer_01_growth_rate_benchmark",
+  "version": "0.1",
+  "batch_name": "user_offer_01",
+  "task": "growth_rate_consistency_check",
+  "language": "zh",
+  "document_type": "Chinese listed-company annual report",
+  "source_dir": "data/raw_reports/user_offer_01",
+  "parsed_dir": "data/parsed_reports",
+  "mutated_dir": "data/mutated_reports",
+  "batch_report": "data/batch_reports/user_offer_01_summary.json",
+  "created_at": "2026-06-21T12:21:41+00:00",
+  "reports_count": 10,
+  "original_checks_count": 86,
+  "mutation_samples_count": 29,
+  "notes": [
+    "Original PDFs are not modified.",
+    "Mutations are applied to parsed table JSON only.",
+    "This dataset covers only reported growth-rate consistency checks in annual key financial metrics tables."
+  ]
+}

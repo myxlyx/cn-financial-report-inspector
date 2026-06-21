@@ -291,6 +291,35 @@ data/batch_reports/user_offer_01_inputs.json
 
 This workflow evaluates only the current parsing, deterministic growth-rate check, and JSON mutation pipeline. It does not use an LLM or RAG, and the summary does not establish that a financial report is correct.
 
+## Dataset Manifest / Benchmark Index
+
+The dataset manifest module turns one filtered batch into a reproducible index. It records source PDF SHA-256 digests, parsed report metadata, original checks, mutation labels, mutation validation results, and aggregate statistics. It does not copy or modify the source PDFs.
+
+Full rebuild:
+
+```bash
+python scripts/parse_pdfs.py --input-dir data/raw_reports/user_offer_01 --table-mode candidate --force
+python scripts/run_growth_rate_checks.py --parsed-dir data/parsed_reports
+python scripts/generate_growth_rate_mutations.py --parsed-dir data/parsed_reports --output-dir data/mutated_reports --max-mutations-per-report 3 --strategy add_delta --force
+python scripts/run_growth_rate_checks.py --parsed-dir data/mutated_reports
+python scripts/summarize_batch_results.py --parsed-dir data/parsed_reports --mutated-dir data/mutated_reports --source-dir data/raw_reports/user_offer_01 --output data/batch_reports/user_offer_01_summary.md
+python scripts/build_dataset_manifest.py --batch-name user_offer_01 --source-dir data/raw_reports/user_offer_01 --parsed-dir data/parsed_reports --mutated-dir data/mutated_reports --batch-report data/batch_reports/user_offer_01_summary.json --output-dir data/datasets/user_offer_01 --force
+```
+
+The benchmark index contains:
+
+```text
+data/datasets/user_offer_01/
+  dataset_manifest.json     # identity, provenance, and scope
+  reports_manifest.jsonl    # one row per source report
+  checks_manifest.jsonl     # one row per original growth-rate check
+  mutations_manifest.jsonl  # one row per labeled mutation
+  dataset_stats.json        # coverage and validation statistics
+  dataset_card.md           # human-readable dataset documentation
+```
+
+The builder filters by the selected source directory and reports validation warnings instead of silently dropping inconsistent records. This remains a table-JSON-level synthetic mutation benchmark for one deterministic check type, not a complete financial audit dataset.
+
 ## Current Limitations
 
 - No OCR is performed.
@@ -301,3 +330,4 @@ This workflow evaluates only the current parsing, deterministic growth-rate chec
 - Financial checks v0.1 depends on recognizable annual key-metric table headers.
 - Ambiguous mappings are marked for future semantic mapping instead of calling an LLM.
 - Mutation samples v0.1 only target reported growth-rate cells in table JSON.
+- Dataset manifest v0.1 indexes existing outputs and does not package source PDFs.

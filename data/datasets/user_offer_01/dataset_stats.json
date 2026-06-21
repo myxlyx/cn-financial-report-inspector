@@ -1,0 +1,31 @@
+{
+  "reports": {
+    "total": 10,
+    "text_based": 10,
+    "recommended": 10
+  },
+  "original_checks": {
+    "total": 86,
+    "ok": 74,
+    "mismatch": 0,
+    "not_applicable": 12,
+    "parse_failed": 0,
+    "mapping_failed": 0,
+    "skipped": 0,
+    "review_required": 0
+  },
+  "mutations": {
+    "total": 29,
+    "detected": 29,
+    "undetected": 0,
+    "by_strategy": {
+      "add_delta": 29
+    }
+  },
+  "coverage": {
+    "reports_with_checks": 10,
+    "reports_without_checks": 0
+  },
+  "problem_cases": [],
+  "validation_warnings": []
+}
