@@ -10,14 +10,14 @@
 - Text-based PDFs parsed: 10
 - Skipped PDFs: 0
 - Parse failed PDFs: 0
-- Reports with growth-rate checks: 6
-- Reports without growth-rate checks: 4
-- Total growth-rate checks: 50
-- OK checks: 37
+- Reports with growth-rate checks: 10
+- Reports without growth-rate checks: 0
+- Total growth-rate checks: 86
+- OK checks: 74
 - Mismatch checks: 0
 - Review required checks: 0
-- Mutations generated: 16
-- Mutations validated as detected: 16
+- Mutations generated: 29
+- Mutations validated as detected: 29
 
 ## Per-report parse summary
 
@@ -38,43 +38,36 @@
 
 | report_id | candidate_tables | checks | ok | mismatch | review_required | mapping_failed | not_applicable |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| 000034_digitalchina_2025_annual_report_fdad6d3c | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
-| 000926_fuxing_2025_annual_report_79c79b2f | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 000983_shanxijiaomei_2025_annual_report_ba60ae1a | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
-| 300277_hailianxun_2025_annual_report_c2be3488 | 1 | 0 | 0 | 0 | 0 | 1 | 0 |
+| 000034_digitalchina_2025_annual_report_fdad6d3c | 1 | 8 | 8 | 0 | 0 | 0 | 0 |
+| 000926_fuxing_2025_annual_report_79c79b2f | 1 | 8 | 8 | 0 | 0 | 0 | 0 |
+| 000983_shanxijiaomei_2025_annual_report_ba60ae1a | 1 | 8 | 8 | 0 | 0 | 0 | 0 |
+| 300277_hailianxun_2025_annual_report_c2be3488 | 1 | 8 | 8 | 0 | 0 | 0 | 0 |
 | 600169_taiyuanheavy_2025_annual_report_590e48ac | 2 | 10 | 10 | 0 | 0 | 0 | 0 |
 | 600965_fucheng_2025_annual_report_be5c235f | 2 | 10 | 10 | 0 | 0 | 0 | 0 |
 | 601212_baiyin_2025_annual_report_2e832fe9 | 2 | 8 | 8 | 0 | 0 | 0 | 0 |
-| 688158_ucloud_2025_annual_report_75aa8f8a | 3 | 10 | 5 | 0 | 0 | 0 | 5 |
-| 688353_huashenglithium_2025_annual_report_9a6f0977 | 3 | 11 | 3 | 0 | 0 | 0 | 8 |
-| 871626_weili_2025_annual_report_426cd375 | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
+| 688158_ucloud_2025_annual_report_75aa8f8a | 3 | 9 | 4 | 0 | 0 | 1 | 5 |
+| 688353_huashenglithium_2025_annual_report_9a6f0977 | 3 | 9 | 2 | 0 | 0 | 1 | 7 |
+| 871626_weili_2025_annual_report_426cd375 | 2 | 8 | 8 | 0 | 0 | 1 | 0 |
 
 ## Mutation summary
 
 | source_report_id | mutations | detected | undetected | strategies |
 |---|---:|---:|---:|---|
-| 000034_digitalchina_2025_annual_report_fdad6d3c | 0 | 0 | 0 |  |
-| 000926_fuxing_2025_annual_report_79c79b2f | 0 | 0 | 0 |  |
-| 000983_shanxijiaomei_2025_annual_report_ba60ae1a | 0 | 0 | 0 |  |
-| 300277_hailianxun_2025_annual_report_c2be3488 | 0 | 0 | 0 |  |
+| 000034_digitalchina_2025_annual_report_fdad6d3c | 3 | 3 | 0 | add_delta |
+| 000926_fuxing_2025_annual_report_79c79b2f | 3 | 3 | 0 | add_delta |
+| 000983_shanxijiaomei_2025_annual_report_ba60ae1a | 3 | 3 | 0 | add_delta |
+| 300277_hailianxun_2025_annual_report_c2be3488 | 3 | 3 | 0 | add_delta |
 | 600169_taiyuanheavy_2025_annual_report_590e48ac | 3 | 3 | 0 | add_delta |
 | 600965_fucheng_2025_annual_report_be5c235f | 3 | 3 | 0 | add_delta |
 | 601212_baiyin_2025_annual_report_2e832fe9 | 3 | 3 | 0 | add_delta |
 | 688158_ucloud_2025_annual_report_75aa8f8a | 3 | 3 | 0 | add_delta |
-| 688353_huashenglithium_2025_annual_report_9a6f0977 | 3 | 3 | 0 | add_delta |
-| 871626_weili_2025_annual_report_426cd375 | 1 | 1 | 0 | add_delta |
+| 688353_huashenglithium_2025_annual_report_9a6f0977 | 2 | 2 | 0 | add_delta |
+| 871626_weili_2025_annual_report_426cd375 | 3 | 3 | 0 | add_delta |
 
 ## Problem cases
 
-| report_id | issue | suggestion |
-|---|---|---|
-| 000034_digitalchina_2025_annual_report_fdad6d3c | no_growth_rate_checks | Need manual inspection: no growth-rate checks generated. |
-| 000926_fuxing_2025_annual_report_79c79b2f | no_candidate_table | Need manual inspection: no candidate annual key metrics table found. |
-| 000926_fuxing_2025_annual_report_79c79b2f | no_growth_rate_checks | Need manual inspection: no growth-rate checks generated. |
-| 000983_shanxijiaomei_2025_annual_report_ba60ae1a | no_growth_rate_checks | Need manual inspection: no growth-rate checks generated. |
-| 300277_hailianxun_2025_annual_report_c2be3488 | no_growth_rate_checks | Need manual inspection: no growth-rate checks generated. |
+No automatic problem cases were identified.
 
 ## Suggested next actions
 
-- Need manual inspection: no growth-rate checks generated.
-- Need manual inspection: no candidate annual key metrics table found.
+- Manually review a sample of extracted tables and check evidence.

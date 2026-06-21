@@ -225,7 +225,13 @@ Each report receives:
 data/parsed_reports/<report_id>/checks/
   growth_rate_checks.jsonl
   growth_rate_summary.json
+  mapping_diagnostics.jsonl
 ```
+
+`mapping_diagnostics.jsonl` records candidate decisions, confidence, notes, and
+small table previews so mapping failures can be inspected without opening every
+table JSON file. The v0.2 rule mapper supports blank item headers, noisy section
+text, and sparse PyMuPDF tables while retaining original source-cell coordinates.
 
 This is only a consistency check for one reported growth-rate formula. It is not a complete financial audit, semantic table classifier, or AI error-detection system. Rows reported as percentage-point changes are intentionally not evaluated with the growth-rate formula.
 

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Iterable
 
 from fri_checks.growth_rate_checker import DEFAULT_TOLERANCE, check_growth_rate_tasks
-from fri_checks.schema import CheckResult, CheckSummary
+from fri_checks.schema import CheckResult, CheckSummary, MappingResult
 from fri_checks.semantic_mapper import (
     BaseSemanticMapper,
     RuleBasedAnnualKeyMetricsMapper,
@@ -30,17 +30,31 @@ def run_report_checks(
     semantic_mapper = mapper or RuleBasedAnnualKeyMetricsMapper()
     table_records = list(_read_jsonl(index_path))
     results: list[CheckResult] = []
+    mapping_diagnostics: list[dict] = []
     candidate_tables = 0
     mapping_failed_count = 0
 
     for table_record in table_records:
         try:
             table = _load_table(report_dir, table_record)
-        except (OSError, json.JSONDecodeError, ValueError):
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
             mapping_failed_count += 1
+            mapping_diagnostics.append(
+                {
+                    "report_id": report_id,
+                    "table_id": str(table_record.get("table_id", "")),
+                    "page": int(table_record.get("page") or 0),
+                    "is_candidate": False,
+                    "status": "mapping_failed",
+                    "confidence": 0.0,
+                    "notes": [f"table_load_failed:{type(exc).__name__}"],
+                    "preview_rows": [],
+                }
+            )
             continue
 
         mapping = semantic_mapper.map_table(table, report_id=report_id)
+        mapping_diagnostics.append(_mapping_diagnostic(mapping, table))
         if mapping.is_candidate:
             candidate_tables += 1
         if mapping.status == "mapping_failed":
@@ -53,6 +67,10 @@ def run_report_checks(
     _write_jsonl(
         checks_dir / "growth_rate_checks.jsonl",
         (result.to_dict() for result in results),
+    )
+    _write_jsonl(
+        checks_dir / "mapping_diagnostics.jsonl",
+        mapping_diagnostics,
     )
 
     summary = CheckSummary(
@@ -130,6 +148,23 @@ def _load_table(report_dir: Path, record: dict) -> dict:
     if isinstance(record.get("data"), list):
         return record
     raise FileNotFoundError(f"Missing table JSON: {candidate}")
+
+
+def _mapping_diagnostic(mapping: MappingResult, table: dict) -> dict:
+    data = table.get("data")
+    preview_rows = []
+    if isinstance(data, list):
+        preview_rows = [row for row in data[:3] if isinstance(row, list)]
+    return {
+        "report_id": mapping.report_id,
+        "table_id": mapping.table_id,
+        "page": mapping.page,
+        "is_candidate": mapping.is_candidate,
+        "status": mapping.status,
+        "confidence": mapping.confidence,
+        "notes": mapping.notes,
+        "preview_rows": preview_rows,
+    }
 
 
 def _read_json(path: Path) -> dict:

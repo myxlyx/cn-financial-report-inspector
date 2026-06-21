@@ -57,11 +57,18 @@ def test_cli_writes_growth_rate_check_outputs(tmp_path: Path):
     assert completed.returncode == 0, completed.stderr
     checks_path = report_dir / "checks" / "growth_rate_checks.jsonl"
     summary_path = report_dir / "checks" / "growth_rate_summary.json"
+    diagnostics_path = report_dir / "checks" / "mapping_diagnostics.jsonl"
     assert checks_path.exists()
     assert summary_path.exists()
+    assert diagnostics_path.exists()
     result = json.loads(checks_path.read_text(encoding="utf-8").strip())
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    diagnostic = json.loads(diagnostics_path.read_text(encoding="utf-8").strip())
     assert result["status"] == "ok"
     assert result["computed_growth_rate"] == "20.00"
     assert summary["checks_count"] == 1
     assert summary["candidate_tables"] == 1
+    assert diagnostic["table_id"] == "table_001"
+    assert diagnostic["is_candidate"] is True
+    assert diagnostic["status"] == "ok"
+    assert diagnostic["preview_rows"][0][0] == "主要会计数据"
