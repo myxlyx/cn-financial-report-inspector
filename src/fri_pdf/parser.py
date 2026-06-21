@@ -9,7 +9,7 @@ import fitz
 from fri_pdf.markdown_exporter import export_markdown, export_pages_jsonl
 from fri_pdf.pdf_type import classify_pdf
 from fri_pdf.schema import PageText, ParseResult, ReportMetadata
-from fri_pdf.table_extractor import extract_tables
+from fri_pdf.table_extractor import TableMode, extract_tables
 from fri_pdf.utils import (
     ensure_dir,
     project_relative_path,
@@ -25,6 +25,7 @@ def process_pdf(
     parsed_root: Path,
     manifests_root: Path,
     force: bool = False,
+    table_mode: TableMode = "candidate",
 ) -> ParseResult:
     """Detect, write manifest, and parse a PDF if it is text-based."""
     report_id = slugify_filename(pdf_path)
@@ -50,6 +51,7 @@ def process_pdf(
         manifest.pdf_type,
         project_root=project_root,
         force=force,
+        table_mode=table_mode,
     )
     return ParseResult(
         report_id=report_id,
@@ -68,6 +70,7 @@ def parse_pdf(
     pdf_type: str = "text_based",
     project_root: Path | None = None,
     force: bool = False,
+    table_mode: TableMode = "candidate",
 ) -> tuple[Path, list[str]]:
     """Extract text, Markdown, JSONL pages, best-effort tables, and metadata."""
     report_dir = reset_dir(parsed_root / report_id) if force else ensure_dir(parsed_root / report_id)
@@ -92,7 +95,12 @@ def parse_pdf(
         export_markdown(pages, markdown_path)
         export_pages_jsonl(pages, pages_jsonl_path)
 
-        table_metadata, table_warnings = extract_tables(doc, report_dir, pages=pages)
+        table_metadata, table_warnings = extract_tables(
+            doc,
+            report_dir,
+            pages=pages,
+            mode=table_mode,
+        )
         warnings.extend(table_warnings)
 
         quality_path = report_dir / "parse_quality.json"

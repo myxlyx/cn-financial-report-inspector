@@ -76,9 +76,19 @@ python scripts/parse_pdfs.py --input-dir data/raw_pdfs
 python scripts/parse_pdfs.py --pdf data/raw_pdfs/example.pdf
 python scripts/parse_pdfs.py --limit 1
 python scripts/parse_pdfs.py --force
+python scripts/parse_pdfs.py --table-mode candidate
+python scripts/parse_pdfs.py --table-mode none
 ```
 
 `--force` removes and regenerates each selected report output directory. PDF discovery is case-insensitive, so both `.pdf` and `.PDF` files are supported.
+
+Table extraction defaults to `candidate` mode so PyMuPDF does not run `page.find_tables()` across every page of a long annual report:
+
+- `candidate`: extract only pages containing annual key-metric or growth-rate keywords.
+- `none`: skip table extraction while still writing text, metadata, quality data, and an empty table index.
+- `all`: attempt table extraction on every page. This preserves the original exhaustive behavior and can be slow on complex PDFs.
+
+Candidate or disabled modes record skipped-page information in `metadata.json` and `parse_quality.json`. The terminal summary reports the warning count.
 
 The script will:
 
@@ -222,7 +232,7 @@ This is only a consistency check for one reported growth-rate formula. It is not
 
 - No OCR is performed.
 - Scanned and image-based PDFs are skipped by design.
-- Table extraction uses PyMuPDF `page.find_tables()` on a best-effort basis.
+- Table extraction uses PyMuPDF `page.find_tables()` on a best-effort basis and defaults to keyword candidate pages.
 - Table extraction quality depends on the PDF layout and installed PyMuPDF version.
 - Extracted text is page-level plain text, not a semantic document hierarchy.
 - Financial checks v0.1 depends on recognizable annual key-metric table headers.

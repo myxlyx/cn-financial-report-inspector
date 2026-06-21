@@ -5,18 +5,31 @@ from __future__ import annotations
 import csv
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import fitz
 
 from fri_pdf.schema import PageText, TableMetadata
 from fri_pdf.utils import ensure_dir, write_json, write_jsonl
 
+TableMode = Literal["all", "candidate", "none"]
+
+CANDIDATE_TABLE_KEYWORDS = (
+    "近三年主要会计数据和财务指标",
+    "主要会计数据和财务指标",
+    "主要会计数据",
+    "主要财务指标",
+    "本期比上年同期增减",
+    "本年比上年增减",
+    "同比增减",
+)
+
 
 def extract_tables(
     doc: fitz.Document,
     report_dir: Path,
     pages: list[PageText] | None = None,
+    mode: TableMode = "all",
 ) -> tuple[list[TableMetadata], list[str]]:
     """Extract tables with page.find_tables when available.
 
@@ -28,8 +41,30 @@ def extract_tables(
     metadata: list[TableMetadata] = []
     warnings: list[str] = []
 
+    if mode not in {"all", "candidate", "none"}:
+        raise ValueError(f"Unsupported table extraction mode: {mode}")
+
+    if mode == "none":
+        warnings.append(
+            f"Table extraction disabled by table_mode=none; skipped {doc.page_count} pages."
+        )
+        write_jsonl(index_path, [])
+        return metadata, warnings
+
+    selected_pages = set(range(1, doc.page_count + 1))
+    if mode == "candidate":
+        selected_pages = set(candidate_page_numbers(pages or []))
+        skipped_pages = doc.page_count - len(selected_pages)
+        warnings.append(
+            "Table extraction mode 'candidate' selected "
+            f"{len(selected_pages)} of {doc.page_count} pages; "
+            f"skipped {skipped_pages} non-candidate pages."
+        )
+
     for page_index in range(doc.page_count):
         page_number = page_index + 1
+        if page_number not in selected_pages:
+            continue
         page = doc.load_page(page_index)
         find_tables = getattr(page, "find_tables", None)
         if find_tables is None:
@@ -78,6 +113,21 @@ def extract_tables(
 
     write_jsonl(index_path, (item.to_dict() for item in metadata))
     return metadata, warnings
+
+
+def candidate_page_numbers(pages: list[PageText]) -> list[int]:
+    """Return pages whose extracted text suggests a relevant financial table."""
+    compact_keywords = tuple(_compact_text(keyword) for keyword in CANDIDATE_TABLE_KEYWORDS)
+    candidates: list[int] = []
+    for page in pages:
+        compact_text = _compact_text(page.text)
+        if any(keyword in compact_text for keyword in compact_keywords):
+            candidates.append(page.page)
+    return candidates
+
+
+def _compact_text(value: str) -> str:
+    return "".join(value.split())
 
 
 def _extract_table_rows(table: Any) -> list[list[str]]:

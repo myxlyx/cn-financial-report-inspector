@@ -7,6 +7,6 @@
   "not_applicable_count": 0,
   "parse_failed_count": 0,
   "mapping_failed_count": 0,
-  "tables_scanned": 260,
+  "tables_scanned": 9,
   "candidate_tables": 2
 }

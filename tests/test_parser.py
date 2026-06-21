@@ -62,3 +62,28 @@ def test_force_recreates_report_directory(tmp_path: Path):
 
     assert second.report_id == first.report_id
     assert not stale_file.exists()
+
+
+def test_table_mode_none_writes_text_outputs_and_empty_table_index(tmp_path: Path):
+    pdf_path = tmp_path / "no_tables.pdf"
+    parsed_root = tmp_path / "parsed_reports"
+    manifests_root = tmp_path / "manifests"
+    _make_text_pdf(pdf_path, text="近三年主要会计数据和财务指标\n" * 20)
+
+    result = process_pdf(
+        pdf_path,
+        parsed_root,
+        manifests_root,
+        force=True,
+        table_mode="none",
+    )
+
+    report_dir = parsed_root / result.report_id
+    metadata = json.loads((report_dir / "metadata.json").read_text(encoding="utf-8"))
+    quality = json.loads((report_dir / "parse_quality.json").read_text(encoding="utf-8"))
+    assert (report_dir / "report.md").exists()
+    assert (report_dir / "pages.jsonl").exists()
+    assert (report_dir / "tables_index.jsonl").read_text(encoding="utf-8") == ""
+    assert metadata["tables_count"] == 0
+    assert any("table_mode=none" in warning for warning in metadata["parse_warnings"])
+    assert any("table_mode=none" in warning for warning in quality["warnings"])

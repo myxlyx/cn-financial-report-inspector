@@ -44,6 +44,15 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Delete and regenerate each parsed report output directory.",
     )
+    parser.add_argument(
+        "--table-mode",
+        choices=("all", "candidate", "none"),
+        default="candidate",
+        help=(
+            "Table extraction scope: all pages, keyword candidate pages, or none. "
+            "Defaults to candidate."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -63,7 +72,13 @@ def main() -> int:
 
     iterator = tqdm(pdf_paths, desc="Parsing PDFs") if tqdm else pdf_paths
     results = [
-        process_pdf(path, parsed_root, manifests_root, force=args.force)
+        process_pdf(
+            path,
+            parsed_root,
+            manifests_root,
+            force=args.force,
+            table_mode=args.table_mode,
+        )
         for path in iterator
     ]
 
@@ -73,6 +88,7 @@ def main() -> int:
     print(f"- PDFs found: {len(results)}")
     print(f"- Parsed text-based PDFs: {parsed_count}")
     print(f"- Skipped PDFs: {skipped_count}")
+    print(f"- Table mode: {args.table_mode}")
     print(f"- Manifests: {manifests_root}")
     print(f"- Parsed reports: {parsed_root}")
 
