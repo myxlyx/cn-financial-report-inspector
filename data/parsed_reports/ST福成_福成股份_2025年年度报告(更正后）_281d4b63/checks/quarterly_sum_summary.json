@@ -1,12 +1,13 @@
 {
   "report_id": "ST福成_福成股份_2025年年度报告(更正后）_281d4b63",
-  "candidate_tables": 0,
-  "checks_count": 0,
-  "ok_count": 0,
+  "candidate_tables": 2,
+  "checks_count": 3,
+  "ok_count": 3,
   "mismatch_count": 0,
   "not_applicable_count": 0,
   "parse_failed_count": 0,
-  "mapping_failed_count": 0,
+  "mapping_failed_count": 1,
   "review_required_count": 0,
+  "duplicate_skipped_count": 0,
   "warnings": []
 }

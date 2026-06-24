@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from decimal import Decimal, ROUND_HALF_UP
+import re
 
 from fri_checks.formula_registry import TWO_DECIMAL_PLACES
 from fri_checks.number_parser import parse_financial_number
@@ -67,16 +68,31 @@ def check_quarterly_sum_task(
     assert q2.value is not None
     assert q3.value is not None
     assert q4.value is not None
-    quarterly_sum = (q1.value + q2.value + q3.value + q4.value).quantize(
+    annual_value = _scale_value(annual.value, task.annual_value_scale)
+    q1_value = _scale_value(q1.value, task.quarterly_value_scale)
+    q2_value = _scale_value(q2.value, task.quarterly_value_scale)
+    q3_value = _scale_value(q3.value, task.quarterly_value_scale)
+    q4_value = _scale_value(q4.value, task.quarterly_value_scale)
+    if task.annual_value_scale != 1:
+        notes.append(f"annual_value_scaled_by:{task.annual_value_scale}")
+    if task.quarterly_value_scale != 1:
+        notes.append(f"quarterly_values_scaled_by:{task.quarterly_value_scale}")
+
+    quarterly_sum = (q1_value + q2_value + q3_value + q4_value).quantize(
         TWO_DECIMAL_PLACES,
         rounding=ROUND_HALF_UP,
     )
-    difference = (quarterly_sum - annual.value).quantize(
+    difference = (quarterly_sum - annual_value).quantize(
         TWO_DECIMAL_PLACES,
         rounding=ROUND_HALF_UP,
     )
-    absolute_difference = abs(difference)
-    is_consistent = absolute_difference == 0 or absolute_difference < absolute_tolerance
+    effective_tolerance = max(
+        absolute_tolerance,
+        _scaled_rounding_tolerance(task.annual_value_raw, task.annual_value_scale),
+    )
+    if effective_tolerance != absolute_tolerance:
+        notes.append(f"effective_tolerance:{effective_tolerance}")
+    is_consistent = abs(difference) <= effective_tolerance
     return _result(
         task=task,
         annual=annual,
@@ -89,6 +105,11 @@ def check_quarterly_sum_task(
         review_required=not is_consistent,
         computed_quarterly_sum=quarterly_sum,
         difference=difference,
+        annual_value=annual_value,
+        q1_value=q1_value,
+        q2_value=q2_value,
+        q3_value=q3_value,
+        q4_value=q4_value,
         notes=notes,
     )
 
@@ -115,6 +136,11 @@ def _result(
     review_required: bool,
     computed_quarterly_sum: Decimal | None = None,
     difference: Decimal | None = None,
+    annual_value: Decimal | None = None,
+    q1_value: Decimal | None = None,
+    q2_value: Decimal | None = None,
+    q3_value: Decimal | None = None,
+    q4_value: Decimal | None = None,
     notes: list[str] | None = None,
 ) -> QuarterlyCheckResult:
     return QuarterlyCheckResult(
@@ -130,11 +156,11 @@ def _result(
         q2_raw=task.q2_raw,
         q3_raw=task.q3_raw,
         q4_raw=task.q4_raw,
-        annual_value=annual.value,
-        q1_value=q1.value,
-        q2_value=q2.value,
-        q3_value=q3.value,
-        q4_value=q4.value,
+        annual_value=annual_value if annual_value is not None else annual.value,
+        q1_value=q1_value if q1_value is not None else q1.value,
+        q2_value=q2_value if q2_value is not None else q2.value,
+        q3_value=q3_value if q3_value is not None else q3.value,
+        q4_value=q4_value if q4_value is not None else q4.value,
         computed_quarterly_sum=computed_quarterly_sum,
         difference=difference,
         absolute_tolerance=absolute_tolerance,
@@ -159,3 +185,20 @@ def _result(
 
 def _parse_notes(prefix: str, result: NumberParseResult) -> list[str]:
     return [f"{prefix}:{note}" for note in result.notes]
+
+
+def _scale_value(value: Decimal, scale: Decimal) -> Decimal:
+    return (value * scale).quantize(TWO_DECIMAL_PLACES, rounding=ROUND_HALF_UP)
+
+
+def _scaled_rounding_tolerance(raw: str, scale: Decimal) -> Decimal:
+    if scale <= 1:
+        return Decimal("0")
+    text = re.sub(r"[,，\s]", "", str(raw))
+    match = re.search(r"\.(\d+)", text)
+    decimal_places = len(match.group(1)) if match else 0
+    quantum = Decimal(1).scaleb(-decimal_places)
+    return (quantum * scale / Decimal("2")).quantize(
+        TWO_DECIMAL_PLACES,
+        rounding=ROUND_HALF_UP,
+    )

@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
+from decimal import Decimal
 from typing import Any
 
 from fri_checks.schema import (
@@ -16,6 +17,7 @@ from fri_checks.schema import (
 )
 
 QUARTERLY_CONTEXT_KEYWORDS = (
+    "分季度主要财务数据",
     "分季度主要财务指标",
     "分季度主要会计数据",
     "主要财务指标分季度情况",
@@ -73,6 +75,7 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
     ) -> QuarterlyMappingResult:
         table_id = str(table.get("table_id", ""))
         page = _safe_int(table.get("page"))
+        quarterly_unit, quarterly_value_scale = detect_table_unit(table)
         normalized_table = _normalize_table(_coerce_rows(table.get("data")))
         rows = normalized_table.rows
         candidate_score, candidate_notes = self._candidate_score(table, rows)
@@ -118,6 +121,8 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
                 columns=by_role,
                 source_columns=normalized_table.source_columns,
                 annual_references=annual_references,
+                quarterly_unit=quarterly_unit,
+                quarterly_value_scale=quarterly_value_scale,
             )
             if mapped_row is not None:
                 mapped_rows.append(mapped_row)
@@ -159,17 +164,21 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
         context = _normalize_text(
             str(table.get("section_candidate", "")) + str(table.get("title_candidate", ""))
         )
+        preview = _normalize_text("".join(cell for row in rows[:5] for cell in row))
         score = 0.0
         notes: list[str] = []
 
         if any(keyword in context for keyword in QUARTERLY_CONTEXT_KEYWORDS):
-            score += 0.5
+            score += 0.6
             notes.append("quarterly_metrics_context")
+        elif "分季度" in context:
+            score += 0.25
+            notes.append("quarterly_context_keyword")
 
         structural = _find_structural_header(rows)
         if structural is not None:
             header_index = structural
-            score += 0.45
+            score += 0.35
             notes.append("four_quarter_columns_detected")
             metric_count = _count_metric_rows(rows[header_index + 1 : header_index + 12])
             if metric_count >= 2:
@@ -179,7 +188,11 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
                 score += 0.15
                 notes.append("quarterly_metric_detected")
 
-        return min(score, 0.99), notes
+        if _looks_like_multi_year_quarterly_comparison(context + preview):
+            score -= 0.35
+            notes.append("multi_year_quarterly_comparison")
+
+        return min(max(score, 0.0), 0.99), notes
 
     def _find_header(
         self,
@@ -217,6 +230,8 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
         columns: dict[str, MappedColumn],
         source_columns: list[int],
         annual_references: dict[str, QuarterlyAnnualReference],
+        quarterly_unit: str | None,
+        quarterly_value_scale: Decimal,
     ) -> tuple[MappedRow | None, QuarterlyCheckTask | None]:
         item = _cell(row, columns["item"].index)
         item_name = _clean_item_name(item)
@@ -239,6 +254,10 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
                 "table_id": "",
                 "page": 0,
                 "row_index": -1,
+                "unit": None,
+                "value_scale": Decimal("1"),
+                "quarterly_unit": quarterly_unit,
+                "quarterly_value_scale": quarterly_value_scale,
             }
         else:
             annual_value_raw = reference.annual_value_raw
@@ -247,6 +266,10 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
                 "table_id": reference.source_table_id,
                 "page": reference.source_page,
                 "row_index": reference.source_row_index,
+                "unit": reference.unit,
+                "value_scale": reference.value_scale,
+                "quarterly_unit": quarterly_unit,
+                "quarterly_value_scale": quarterly_value_scale,
             }
 
         mapped_row = MappedRow(
@@ -273,10 +296,31 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
             q3_cell=_source_column(source_columns, columns["q3"].index),
             q4_cell=_source_column(source_columns, columns["q4"].index),
             annual_reference=annual_reference,
+            annual_value_scale=(
+                reference.value_scale if reference is not None else Decimal("1")
+            ),
+            quarterly_value_scale=quarterly_value_scale,
             confidence=row_confidence,
             notes=notes.copy(),
         )
         return mapped_row, task
+
+
+def detect_table_unit(table: dict[str, Any]) -> tuple[str | None, Decimal]:
+    rows = _coerce_rows(table.get("data"))
+    preview = "".join(cell for row in rows[:2] for cell in row)
+    context = _normalize_text(
+        str(table.get("title_candidate", ""))
+        + str(table.get("section_candidate", ""))
+        + preview
+    )
+    if re.search(r"单位[:：]?(?:人民币)?亿元", context):
+        return "亿元", Decimal("100000000")
+    if re.search(r"单位[:：]?(?:人民币)?万元", context):
+        return "万元", Decimal("10000")
+    if re.search(r"单位[:：]?(?:人民币)?元", context):
+        return "元", Decimal("1")
+    return None, Decimal("1")
 
 
 def normalize_item_key(value: str) -> str:
@@ -390,6 +434,13 @@ def _find_structural_header(rows: list[list[str]]) -> int | None:
             if set(_quarter_columns(merged)) == {"q1", "q2", "q3", "q4"}:
                 return row_index + 1
     return None
+
+
+def _looks_like_multi_year_quarterly_comparison(value: str) -> bool:
+    years = set(re.findall(r"(?:19|20)\d{2}", value))
+    if len(years) < 2:
+        return False
+    return set(_quarter_columns([value])) == {"q1", "q2", "q3", "q4"}
 
 
 def _quarter_columns(row: list[str]) -> dict[str, int]:

@@ -78,12 +78,17 @@ def main(argv: list[str] | None = None) -> int:
         "- Review required: "
         f"{sum(summary.review_required_count for summary in summaries)}"
     )
+    print(
+        "- Duplicate tasks skipped: "
+        f"{sum(summary.duplicate_skipped_count for summary in summaries)}"
+    )
     for summary in summaries:
         print(
             f"  - {summary.report_id}: candidates={summary.candidate_tables}, "
             f"checks={summary.checks_count}, ok={summary.ok_count}, "
             f"mismatches={summary.mismatch_count}, "
-            f"not_applicable={summary.not_applicable_count}"
+            f"not_applicable={summary.not_applicable_count}, "
+            f"duplicates_skipped={summary.duplicate_skipped_count}"
         )
     return 0
 

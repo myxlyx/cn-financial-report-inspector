@@ -151,6 +151,8 @@ class QuarterlyAnnualReference(SerializableDataclass):
     source_table_id: str
     source_page: int
     source_row_index: int
+    unit: str | None = None
+    value_scale: Decimal = Decimal("1")
 
 
 @dataclass
@@ -170,6 +172,8 @@ class QuarterlyCheckTask(SerializableDataclass):
     q3_cell: int
     q4_cell: int
     annual_reference: dict[str, Any]
+    annual_value_scale: Decimal = Decimal("1")
+    quarterly_value_scale: Decimal = Decimal("1")
     mapping_source: str = "rule_based"
     confidence: float = 0.0
     notes: list[str] = field(default_factory=list)
@@ -232,4 +236,5 @@ class QuarterlyCheckSummary(SerializableDataclass):
     parse_failed_count: int
     mapping_failed_count: int
     review_required_count: int
+    duplicate_skipped_count: int = 0
     warnings: list[str] = field(default_factory=list)

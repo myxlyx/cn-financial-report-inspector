@@ -9,11 +9,12 @@
   "empty_pages": [],
   "short_text_pages_count": 0,
   "short_text_pages": [],
-  "tables_count": 9,
+  "tables_count": 11,
   "pages_with_tables": [
     4,
     6,
-    7
+    7,
+    8
   ],
   "chinese_char_ratio": 0.6656,
   "garbled_char_ratio": 0.0045,
@@ -21,6 +22,6 @@
   "recommended_for_dataset": true,
   "warnings_count": 1,
   "warnings": [
-    "Table extraction mode 'candidate' selected 3 of 228 pages; skipped 225 non-candidate pages."
+    "Table extraction mode 'candidate' selected 4 of 228 pages; skipped 224 non-candidate pages."
   ]
 }

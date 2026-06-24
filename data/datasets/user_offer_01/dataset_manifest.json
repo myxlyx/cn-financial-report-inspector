@@ -9,7 +9,7 @@
   "parsed_dir": "data/parsed_reports",
   "mutated_dir": "data/mutated_reports",
   "batch_report": "data/batch_reports/user_offer_01_summary.json",
-  "created_at": "2026-06-21T12:21:41+00:00",
+  "created_at": "2026-06-24T18:37:46+00:00",
   "reports_count": 10,
   "original_checks_count": 86,
   "mutation_samples_count": 29,

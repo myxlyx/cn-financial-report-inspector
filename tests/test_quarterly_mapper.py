@@ -115,3 +115,32 @@ def test_quarterly_mapper_marks_missing_annual_reference():
     assert result.status == "ok"
     assert result.tasks[0].annual_value_raw == ""
     assert "missing_annual_reference" in result.tasks[0].notes
+
+
+def test_quarterly_mapper_skips_multi_year_quarterly_comparison_table():
+    table = {
+        "table_id": "table_006",
+        "page": 18,
+        "section_candidate": "季度经营对比",
+        "data": [
+            [
+                "",
+                "2025 年度第一季度",
+                "2025 年度第二季度",
+                "2024 年度第三季度",
+                "2024 年度第四季度",
+            ],
+            ["营业收入", "10", "20", "30", "40"],
+            ["归属于上市公司股东的净利润", "1", "2", "3", "4"],
+        ],
+    }
+
+    result = RuleBasedQuarterlyMetricsMapper().map_table(
+        table,
+        annual_references=_annual_refs(),
+        report_id="sample-report",
+    )
+
+    assert result.is_candidate is False
+    assert result.status == "skipped"
+    assert "multi_year_quarterly_comparison" in result.notes

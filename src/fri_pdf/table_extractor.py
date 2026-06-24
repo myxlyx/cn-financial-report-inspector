@@ -23,6 +23,20 @@ CANDIDATE_TABLE_KEYWORDS = (
     "本年比上年增减",
     "同比增减",
 )
+QUARTERLY_TABLE_KEYWORDS = (
+    "分季度主要财务数据",
+    "分季度主要财务指标",
+    "分季度主要会计数据",
+    "主要财务指标分季度情况",
+)
+FULL_QUARTER_HEADERS = ("第一季度", "第二季度", "第三季度", "第四季度")
+SHORT_QUARTER_HEADERS = ("一季度", "二季度", "三季度", "四季度")
+QUARTERLY_METRIC_KEYWORDS = (
+    "营业收入",
+    "归属于上市公司股东的净利润",
+    "归属于上市公司股东的扣除非经常性损益的净利润",
+    "经营活动产生的现金流量净额",
+)
 
 
 def extract_tables(
@@ -117,13 +131,33 @@ def extract_tables(
 
 def candidate_page_numbers(pages: list[PageText]) -> list[int]:
     """Return pages whose extracted text suggests a relevant financial table."""
-    compact_keywords = tuple(_compact_text(keyword) for keyword in CANDIDATE_TABLE_KEYWORDS)
     candidates: list[int] = []
     for page in pages:
-        compact_text = _compact_text(page.text)
-        if any(keyword in compact_text for keyword in compact_keywords):
+        if _is_candidate_table_page(page.text):
             candidates.append(page.page)
     return candidates
+
+
+def _is_candidate_table_page(text: str) -> bool:
+    compact_text = _compact_text(text)
+    annual_keywords = tuple(_compact_text(keyword) for keyword in CANDIDATE_TABLE_KEYWORDS)
+    if any(keyword in compact_text for keyword in annual_keywords):
+        return True
+
+    quarterly_keywords = tuple(_compact_text(keyword) for keyword in QUARTERLY_TABLE_KEYWORDS)
+    metric_keywords = tuple(_compact_text(keyword) for keyword in QUARTERLY_METRIC_KEYWORDS)
+    if (
+        ("分季度" in compact_text or any(keyword in compact_text for keyword in quarterly_keywords))
+        and any(keyword in compact_text for keyword in metric_keywords)
+    ):
+        return True
+
+    if all(_compact_text(header) in compact_text for header in FULL_QUARTER_HEADERS):
+        return True
+    if all(_compact_text(header) in compact_text for header in SHORT_QUARTER_HEADERS):
+        return True
+
+    return False
 
 
 def _compact_text(value: str) -> str:

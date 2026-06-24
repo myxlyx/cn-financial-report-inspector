@@ -83,3 +83,32 @@ def test_candidate_mode_extracts_only_keyword_pages(tmp_path: Path):
     assert len(tables) == 1
     assert tables[0].page == 2
     assert any("selected 1 of 2 pages" in warning for warning in warnings)
+
+
+def test_candidate_page_numbers_include_standalone_quarterly_metric_page():
+    pages = [
+        PageText(page=1, text="公司第一季度召开了经营会议。", char_count=14),
+        PageText(
+            page=2,
+            text=(
+                "九、2025 年分季度主要财务数据\n"
+                "第一季度 第二季度 第三季度 第四季度\n"
+                "营业收入"
+            ),
+            char_count=50,
+        ),
+    ]
+
+    assert candidate_page_numbers(pages) == [2]
+
+
+def test_candidate_page_numbers_ignore_single_quarter_mention_in_prose():
+    pages = [
+        PageText(
+            page=1,
+            text="公司第一季度召开了经营会议，并讨论全年业务计划。",
+            char_count=24,
+        )
+    ]
+
+    assert candidate_page_numbers(pages) == []

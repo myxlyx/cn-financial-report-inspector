@@ -5,11 +5,11 @@
   "page_count": 228,
   "markdown_path": "report.md",
   "pages_jsonl_path": "pages.jsonl",
-  "tables_count": 9,
+  "tables_count": 11,
   "tables_dir": "tables",
   "tables_index_path": "tables_index.jsonl",
   "parse_quality_path": "parse_quality.json",
   "parse_warnings": [
-    "Table extraction mode 'candidate' selected 3 of 228 pages; skipped 225 non-candidate pages."
+    "Table extraction mode 'candidate' selected 4 of 228 pages; skipped 224 non-candidate pages."
   ]
 }

@@ -23,15 +23,15 @@
 
 | report_id | source_pdf | pdf_type | page_count | text_pages | tables_count | quality_level | recommended | warnings |
 |---|---|---:|---:|---:|---:|---|---|---:|
-| 000034_digitalchina_2025_annual_report_fdad6d3c | data/raw_reports/user_offer_01/000034_digitalchina_2025_annual_report.pdf | text_based | 283 | 283 | 20 | good | True | 1 |
+| 000034_digitalchina_2025_annual_report_fdad6d3c | data/raw_reports/user_offer_01/000034_digitalchina_2025_annual_report.pdf | text_based | 283 | 283 | 22 | good | True | 1 |
 | 000926_fuxing_2025_annual_report_79c79b2f | data/raw_reports/user_offer_01/000926_fuxing_2025_annual_report.pdf | text_based | 197 | 196 | 21 | good | True | 1 |
 | 000983_shanxijiaomei_2025_annual_report_ba60ae1a | data/raw_reports/user_offer_01/000983_shanxijiaomei_2025_annual_report.pdf | text_based | 254 | 253 | 19 | good | True | 1 |
 | 300277_hailianxun_2025_annual_report_c2be3488 | data/raw_reports/user_offer_01/300277_hailianxun_2025_annual_report.pdf | text_based | 198 | 198 | 25 | good | True | 1 |
-| 600169_taiyuanheavy_2025_annual_report_590e48ac | data/raw_reports/user_offer_01/600169_taiyuanheavy_2025_annual_report.pdf | text_based | 229 | 229 | 8 | good | True | 1 |
-| 600965_fucheng_2025_annual_report_be5c235f | data/raw_reports/user_offer_01/600965_fucheng_2025_annual_report.pdf | text_based | 228 | 228 | 9 | good | True | 1 |
-| 601212_baiyin_2025_annual_report_2e832fe9 | data/raw_reports/user_offer_01/601212_baiyin_2025_annual_report.pdf | text_based | 281 | 281 | 13 | good | True | 1 |
-| 688158_ucloud_2025_annual_report_75aa8f8a | data/raw_reports/user_offer_01/688158_ucloud_2025_annual_report.pdf | text_based | 303 | 303 | 13 | good | True | 1 |
-| 688353_huashenglithium_2025_annual_report_9a6f0977 | data/raw_reports/user_offer_01/688353_huashenglithium_2025_annual_report.pdf | text_based | 305 | 305 | 11 | good | True | 1 |
+| 600169_taiyuanheavy_2025_annual_report_590e48ac | data/raw_reports/user_offer_01/600169_taiyuanheavy_2025_annual_report.pdf | text_based | 229 | 229 | 10 | good | True | 1 |
+| 600965_fucheng_2025_annual_report_be5c235f | data/raw_reports/user_offer_01/600965_fucheng_2025_annual_report.pdf | text_based | 228 | 228 | 11 | good | True | 1 |
+| 601212_baiyin_2025_annual_report_2e832fe9 | data/raw_reports/user_offer_01/601212_baiyin_2025_annual_report.pdf | text_based | 281 | 281 | 18 | good | True | 1 |
+| 688158_ucloud_2025_annual_report_75aa8f8a | data/raw_reports/user_offer_01/688158_ucloud_2025_annual_report.pdf | text_based | 303 | 303 | 15 | good | True | 1 |
+| 688353_huashenglithium_2025_annual_report_9a6f0977 | data/raw_reports/user_offer_01/688353_huashenglithium_2025_annual_report.pdf | text_based | 305 | 305 | 13 | good | True | 1 |
 | 871626_weili_2025_annual_report_426cd375 | data/raw_reports/user_offer_01/871626_weili_2025_annual_report.pdf | text_based | 158 | 157 | 20 | good | True | 1 |
 
 ## Per-report growth-rate check summary
