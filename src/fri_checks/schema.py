@@ -141,3 +141,95 @@ class CheckSummary(SerializableDataclass):
     mapping_failed_count: int
     tables_scanned: int
     candidate_tables: int
+
+
+@dataclass
+class QuarterlyAnnualReference(SerializableDataclass):
+    report_id: str
+    item_name: str
+    annual_value_raw: str
+    source_table_id: str
+    source_page: int
+    source_row_index: int
+
+
+@dataclass
+class QuarterlyCheckTask(SerializableDataclass):
+    report_id: str
+    table_id: str
+    page: int
+    row_index: int
+    item_name: str
+    annual_value_raw: str
+    q1_raw: str
+    q2_raw: str
+    q3_raw: str
+    q4_raw: str
+    q1_cell: int
+    q2_cell: int
+    q3_cell: int
+    q4_cell: int
+    annual_reference: dict[str, Any]
+    mapping_source: str = "rule_based"
+    confidence: float = 0.0
+    notes: list[str] = field(default_factory=list)
+
+
+@dataclass
+class QuarterlyCheckResult(SerializableDataclass):
+    record_type: str
+    report_id: str
+    check_type: str
+    table_id: str
+    page: int
+    row_index: int
+    item_name: str
+    annual_value_raw: str
+    q1_raw: str
+    q2_raw: str
+    q3_raw: str
+    q4_raw: str
+    annual_value: Decimal | None
+    q1_value: Decimal | None
+    q2_value: Decimal | None
+    q3_value: Decimal | None
+    q4_value: Decimal | None
+    computed_quarterly_sum: Decimal | None
+    difference: Decimal | None
+    absolute_tolerance: Decimal
+    status: CheckStatus
+    review_required: bool
+    annual_reference: dict[str, Any]
+    evidence: dict[str, Any]
+    mapping_source: str
+    confidence: float
+    notes: list[str] = field(default_factory=list)
+
+
+@dataclass
+class QuarterlyMappingResult(SerializableDataclass):
+    report_id: str
+    table_id: str
+    page: int
+    is_candidate: bool
+    status: CheckStatus
+    mapped_columns: list[MappedColumn] = field(default_factory=list)
+    mapped_rows: list[MappedRow] = field(default_factory=list)
+    tasks: list[QuarterlyCheckTask] = field(default_factory=list)
+    mapping_source: str = "rule_based"
+    confidence: float = 0.0
+    notes: list[str] = field(default_factory=list)
+
+
+@dataclass
+class QuarterlyCheckSummary(SerializableDataclass):
+    report_id: str
+    candidate_tables: int
+    checks_count: int
+    ok_count: int
+    mismatch_count: int
+    not_applicable_count: int
+    parse_failed_count: int
+    mapping_failed_count: int
+    review_required_count: int
+    warnings: list[str] = field(default_factory=list)

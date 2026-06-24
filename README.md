@@ -9,11 +9,11 @@ tags:
 
 # cn-financial-report-inspector
 
-`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system. The current project contains a stable PDF processing module, one narrowly scoped deterministic financial check, and JSON-level mutation samples for that check.
+`cn-financial-report-inspector` is a research project for inspecting Chinese listed-company annual reports. The long-term direction is an Adaptive RAG / Agent system. The current project contains a stable PDF processing module, narrowly scoped deterministic financial checks, and JSON-level mutation samples for the growth-rate check.
 
 ## Current Scope
 
-The PDF module converts text-based Chinese financial report PDFs into clean intermediate files. Financial checks v0.1 uses those files to verify reported growth rates in annual key financial metric tables. Mutation samples v0.1 introduces labeled errors only in copied table JSON data.
+The PDF module converts text-based Chinese financial report PDFs into clean intermediate files. Current deterministic checks verify reported growth rates and compare quarterly key-metric sums with annual values. Mutation samples v0.1 introduces labeled errors only in copied table JSON data for the growth-rate check.
 
 This stage does not implement:
 
@@ -234,6 +234,36 @@ table JSON file. The v0.2 rule mapper supports blank item headers, noisy section
 text, and sparse PyMuPDF tables while retaining original source-cell coordinates.
 
 This is only a consistency check for one reported growth-rate formula. It is not a complete financial audit, semantic table classifier, or AI error-detection system. Rows reported as percentage-point changes are intentionally not evaluated with the growth-rate formula.
+
+## Quarterly Key Metrics Sum Check
+
+This is the second deterministic check type. It compares the sum of quarterly values in `分季度主要财务指标` style tables with the annual value from the annual key financial metrics checks.
+
+The annual value currently comes from `checks/growth_rate_checks.jsonl`, so run the growth-rate checker first:
+
+```bash
+python scripts/parse_pdfs.py --input-dir data/raw_reports/user_offer_01 --table-mode candidate --force
+python scripts/run_growth_rate_checks.py --parsed-dir data/parsed_reports
+python scripts/run_quarterly_sum_checks.py --parsed-dir data/parsed_reports
+```
+
+Each report receives:
+
+```text
+data/parsed_reports/<report_id>/checks/
+  quarterly_sum_checks.jsonl
+  quarterly_sum_summary.json
+  quarterly_mapping_diagnostics.jsonl
+```
+
+Version 0.1 checks only these rows when they can be mapped:
+
+- 营业收入
+- 归属于上市公司股东的净利润
+- 归属于上市公司股东的扣除非经常性损益的净利润
+- 经营活动产生的现金流量净额
+
+No LLM is used. Python `Decimal` performs the quarterly sum calculation with a default absolute tolerance of `1.00`. This stage does not mutate PDFs, generate synthetic PDFs, or create quarterly mutation samples.
 
 ## Growth-rate Mutation Samples v0.1
 
