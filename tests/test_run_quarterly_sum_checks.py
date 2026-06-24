@@ -217,3 +217,132 @@ def test_runner_deduplicates_lower_confidence_quarterly_candidate(tmp_path: Path
         for diagnostic in diagnostics
     )
     assert summary["duplicate_skipped_count"] == 1
+
+
+def test_cli_generates_four_ok_checks_for_fuxing_style_quarterly_table(tmp_path: Path):
+    parsed_dir = tmp_path / "parsed_reports"
+    report_dir = parsed_dir / "fuxing-report"
+    tables_dir = report_dir / "tables"
+    checks_dir = report_dir / "checks"
+    tables_dir.mkdir(parents=True)
+    checks_dir.mkdir()
+
+    table = {
+        "table_id": "table_010",
+        "page": 8,
+        "json_path": "tables/table_010.json",
+        "title_candidate": "项目",
+        "section_candidate": "2025 年",
+        "data": [
+            ["", "第一季度", "第二季度", "第三季度", "第四季度"],
+            [
+                "营业收入",
+                "344,468,125.63",
+                "388,232,841.20",
+                "283,432,802.53",
+                "2,818,833,318.56",
+            ],
+            [
+                "归属于上市公司股东的净利润",
+                "-96,066,594.05",
+                "-561,661,641.10",
+                "-209,264,899.88",
+                "-3,260,759,648.77",
+            ],
+            [
+                "归属于上市公司股东的扣除非经常性损益的净利润",
+                "-101,046,034.90",
+                "-528,095,216.81",
+                "-138,867,989.12",
+                "-2,541,563,771.62",
+            ],
+            [
+                "经营活动产生的现金流量净额",
+                "274,609,247.01",
+                "408,983,474.92",
+                "-465,934,431.02",
+                "1,123,598,168.87",
+            ],
+        ],
+    }
+    annual_values = [
+        ("营业收入", "3,834,967,087.92"),
+        ("归属于上市公司股东的净利润", "-4,127,752,783.80"),
+        ("归属于上市公司股东的扣除非经常性损益的净利润", "-3,309,573,012.45"),
+        ("经营活动产生的现金流量净额", "1,341,256,459.78"),
+    ]
+    _write_json(report_dir / "metadata.json", {"report_id": "fuxing-report"})
+    _write_json(report_dir / "parse_quality.json", {})
+    _write_json(tables_dir / "table_010.json", table)
+    (report_dir / "tables_index.jsonl").write_text(
+        json.dumps(table, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    with (checks_dir / "growth_rate_checks.jsonl").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as handle:
+        for row_index, (item_name, current_value_raw) in enumerate(
+            annual_values, start=1
+        ):
+            handle.write(
+                json.dumps(
+                    {
+                        "check_type": "growth_rate_consistency",
+                        "report_id": "fuxing-report",
+                        "table_id": "table_annual",
+                        "page": 7,
+                        "row_index": row_index,
+                        "item_name": item_name,
+                        "current_value_raw": current_value_raw,
+                        "status": "ok",
+                    },
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT_PATH),
+            "--parsed-dir",
+            str(parsed_dir),
+            "--report-id",
+            "fuxing-report",
+        ],
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    checks = [
+        json.loads(line)
+        for line in (report_dir / "checks" / "quarterly_sum_checks.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip()
+    ]
+    summary = json.loads(
+        (report_dir / "checks" / "quarterly_sum_summary.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    diagnostics = [
+        json.loads(line)
+        for line in (report_dir / "checks" / "quarterly_mapping_diagnostics.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+        if line.strip()
+    ]
+
+    assert len(checks) == 4
+    assert {check["status"] for check in checks} == {"ok"}
+    assert summary["checks_count"] == 4
+    assert summary["ok_count"] == 4
+    assert summary["mismatch_count"] == 0
+    assert all(
+        "multi_year_quarterly_comparison" not in diagnostic["notes"]
+        for diagnostic in diagnostics
+    )

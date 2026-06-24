@@ -76,9 +76,10 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
         table_id = str(table.get("table_id", ""))
         page = _safe_int(table.get("page"))
         quarterly_unit, quarterly_value_scale = detect_table_unit(table)
-        normalized_table = _normalize_table(_coerce_rows(table.get("data")))
+        raw_rows = _coerce_rows(table.get("data"))
+        normalized_table = _normalize_table(raw_rows)
         rows = normalized_table.rows
-        candidate_score, candidate_notes = self._candidate_score(table, rows)
+        candidate_score, candidate_notes = self._candidate_score(table, rows, raw_rows)
         candidate_notes.extend(normalized_table.notes)
         if candidate_score < 0.5:
             return QuarterlyMappingResult(
@@ -160,11 +161,11 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
         self,
         table: dict[str, Any],
         rows: list[list[str]],
+        raw_rows: list[list[str]],
     ) -> tuple[float, list[str]]:
         context = _normalize_text(
             str(table.get("section_candidate", "")) + str(table.get("title_candidate", ""))
         )
-        preview = _normalize_text("".join(cell for row in rows[:5] for cell in row))
         score = 0.0
         notes: list[str] = []
 
@@ -188,7 +189,7 @@ class RuleBasedQuarterlyMetricsMapper(BaseQuarterlyMapper):
                 score += 0.15
                 notes.append("quarterly_metric_detected")
 
-        if _looks_like_multi_year_quarterly_comparison(context + preview):
+        if _looks_like_multi_year_quarterly_comparison(raw_rows):
             score -= 0.35
             notes.append("multi_year_quarterly_comparison")
 
@@ -436,11 +437,38 @@ def _find_structural_header(rows: list[list[str]]) -> int | None:
     return None
 
 
-def _looks_like_multi_year_quarterly_comparison(value: str) -> bool:
-    years = set(re.findall(r"(?:19|20)\d{2}", value))
+def _looks_like_multi_year_quarterly_comparison(rows: list[list[str]]) -> bool:
+    header_rows = rows[:8]
+    header_text = _normalize_text("".join(cell for row in header_rows for cell in row))
+    years = set(re.findall(r"(?:19|20)\d{2}", header_text))
     if len(years) < 2:
         return False
-    return set(_quarter_columns([value])) == {"q1", "q2", "q3", "q4"}
+
+    for row in header_rows:
+        counts = _quarter_role_counts(row)
+        if sum(counts.values()) >= 8:
+            return True
+        if all(counts.get(role, 0) >= 2 for role in ("q1", "q2", "q3", "q4")):
+            return True
+
+    for index in range(len(header_rows) - 1):
+        merged = _merge_header_rows(header_rows[index], header_rows[index + 1])
+        counts = _quarter_role_counts(merged)
+        if sum(counts.values()) >= 8:
+            return True
+        if all(counts.get(role, 0) >= 2 for role in ("q1", "q2", "q3", "q4")):
+            return True
+    return False
+
+
+def _quarter_role_counts(row: list[str]) -> dict[str, int]:
+    counts = {role: 0 for role in QUARTER_HEADERS}
+    for cell in row:
+        normalized = _normalize_text(cell).lower()
+        for role, aliases in QUARTER_HEADERS.items():
+            if any(alias.lower() in normalized for alias in aliases):
+                counts[role] += 1
+    return counts
 
 
 def _quarter_columns(row: list[str]) -> dict[str, int]:

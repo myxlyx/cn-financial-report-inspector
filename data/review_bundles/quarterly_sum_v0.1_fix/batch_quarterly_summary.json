@@ -3,19 +3,19 @@
   "source_dir": "data/raw_reports/user_offer_01",
   "overview": {
     "reports_processed": 10,
-    "reports_with_quarterly_checks": 9,
-    "reports_without_quarterly_checks": 1,
-    "total_quarterly_checks": 26,
-    "ok_count": 26,
+    "reports_with_quarterly_checks": 10,
+    "reports_without_quarterly_checks": 0,
+    "total_quarterly_checks": 30,
+    "ok_count": 30,
     "mismatch_count": 0,
     "not_applicable_count": 0,
     "parse_failed_count": 0,
     "mapping_failed_count": 5,
     "review_required_count": 0,
-    "duplicate_tasks_skipped": 2,
+    "duplicate_tasks_skipped": 0,
     "candidate_tables_count": 16,
-    "diagnostics_count": 176,
-    "selected_diagnostics_count": 18
+    "diagnostics_count": 174,
+    "selected_diagnostics_count": 16
   },
   "reports": [
     {
@@ -38,19 +38,18 @@
     {
       "report_id": "000926_fuxing_2025_annual_report_79c79b2f",
       "source_pdf": "data/raw_reports/user_offer_01/000926_fuxing_2025_annual_report.pdf",
-      "quarterly_checks_count": 0,
-      "ok_count": 0,
+      "quarterly_checks_count": 4,
+      "ok_count": 4,
       "mismatch_count": 0,
       "not_applicable_count": 0,
       "parse_failed_count": 0,
       "mapping_failed_count": 0,
       "review_required_count": 0,
-      "candidate_tables": 0,
+      "candidate_tables": 1,
       "duplicate_skipped_count": 0,
       "diagnostic_notes": [
         "four_quarter_columns_detected",
-        "multiple_quarterly_metrics_detected",
-        "multi_year_quarterly_comparison"
+        "multiple_quarterly_metrics_detected"
       ]
     },
     {
@@ -80,8 +79,8 @@
       "parse_failed_count": 0,
       "mapping_failed_count": 1,
       "review_required_count": 0,
-      "candidate_tables": 3,
-      "duplicate_skipped_count": 2,
+      "candidate_tables": 2,
+      "duplicate_skipped_count": 0,
       "diagnostic_notes": [
         "quarterly_metrics_context",
         "four_quarter_columns_detected",
@@ -89,9 +88,7 @@
         "sparse_columns_normalized",
         "missing_columns:item,q1,q2,q3,q4",
         "quarterly_metric_detected",
-        "duplicate_quarterly_item:营业收入",
-        "lower_confidence_candidate",
-        "duplicate_quarterly_item:归属于上市公司股东的净利润"
+        "multi_year_quarterly_comparison"
       ]
     },
     {
@@ -180,7 +177,6 @@
         "quarterly_metrics_context",
         "four_quarter_columns_detected",
         "multiple_quarterly_metrics_detected",
-        "multi_year_quarterly_comparison",
         "missing_columns:item,q1,q2,q3,q4"
       ]
     },

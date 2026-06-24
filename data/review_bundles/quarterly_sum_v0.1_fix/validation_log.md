@@ -1,6 +1,6 @@
 # Validation Log
 
-Generated for `quarterly_sum_v0.1_fix`.
+Generated for the targeted Fuxing quarterly-table fix.
 
 ## Code Validation
 
@@ -11,10 +11,10 @@ Result: passed
 
 ```text
 pytest -q
-Result: 79 passed in 2.06s
+Result: 81 passed in 2.16s
 ```
 
-## Full Local Pipeline
+## Full Local Quarterly Validation
 
 ```text
 python scripts/parse_pdfs.py --input-dir data/raw_reports/user_offer_01 --table-mode candidate --force
@@ -32,93 +32,50 @@ OK: 95
 Mismatches: 0
 Review required: 0
 
-Filtered user_offer_01 batch summary:
+Filtered user_offer_01 growth-rate summary:
 Reports included: 10
 Original growth-rate checks: 86
-Mutations generated later: 29
+Original growth-rate mismatches: 0
 ```
 
 ```text
 python scripts/run_quarterly_sum_checks.py --parsed-dir data/parsed_reports
 Reports processed: 13
-Reports with checks: 10
-Checks: 30
-OK: 30
+Reports with checks: 12
+Checks: 37
+OK: 37
 Mismatches: 0
 Not applicable: 0
 Review required: 0
-Duplicate tasks skipped: 4
+Duplicate tasks skipped: 0
 
 Filtered user_offer_01 quarterly summary:
 Reports processed: 10
-Reports with quarterly checks: 9
-Reports without quarterly checks: 1
-Total quarterly checks: 26
-OK: 26
-Mismatches: 0
-Not applicable: 0
-Review required: 0
-Duplicate tasks skipped: 2
-```
-
-```text
-python scripts/generate_growth_rate_mutations.py --parsed-dir data/parsed_reports --output-dir data/mutated_reports --max-mutations-per-report 3 --strategy add_delta --force
-Reports processed: 13
-Mutations generated: 38
-Validated detections: 38
-
-Filtered user_offer_01 mutation summary:
-Mutations generated: 29
-Mutations detected: 29
-```
-
-```text
-python scripts/run_growth_rate_checks.py --parsed-dir data/mutated_reports
-Reports processed: 38
-Checks: 330
-OK: 245
-Mismatches: 38
-Review required: 38
-```
-
-```text
-python scripts/summarize_batch_results.py --parsed-dir data/parsed_reports --mutated-dir data/mutated_reports --source-dir data/raw_reports/user_offer_01 --output data/batch_reports/user_offer_01_summary.md
-Batch: user_offer_01
-PDFs found: 10
-Parsed reports: 10
-Growth-rate checks: 86
-Mutations generated: 29
-Mutations detected: 29
-```
-
-```text
-python scripts/build_dataset_manifest.py --batch-name user_offer_01 --source-dir data/raw_reports/user_offer_01 --parsed-dir data/parsed_reports --mutated-dir data/mutated_reports --batch-report data/batch_reports/user_offer_01_summary.json --output-dir data/datasets/user_offer_01 --force
-Reports included: 10
-Original checks included: 86
-Mutations included: 29
-Validation warnings: 0
-```
-
-## ST Fucheng Spot Check
-
-The tracked ST Fucheng sample was re-parsed with the updated candidate page logic.
-
-```text
-python scripts/parse_pdfs.py --pdf data/raw_pdfs/_ST福成：福成股份：2025年年度报告(更正后）.pdf --table-mode candidate --force
-Parsed text-based PDFs: 1
-```
-
-```text
-python scripts/run_quarterly_sum_checks.py --parsed-dir data/parsed_reports --report-id ST福成_福成股份_2025年年度报告(更正后）_281d4b63
-Reports processed: 1
-Reports with checks: 1
-Checks: 3
-OK: 3
+Reports with quarterly checks: 10
+Reports without quarterly checks: 0
+Total quarterly checks: 30
+OK: 30
 Mismatches: 0
 Not applicable: 0
 Review required: 0
 Duplicate tasks skipped: 0
 ```
+
+## Fuxing Regression Check
+
+Report: `000926_fuxing_2025_annual_report_79c79b2f`
+
+```text
+Quarterly candidate tables: 1
+Quarterly checks: 4
+OK: 4
+Mismatches: 0
+Not applicable: 0
+Review required: 0
+Duplicate tasks skipped: 0
+```
+
+The selected table is `table_010` on page 8. It is a standard one-year quarterly key metrics table and is no longer incorrectly marked as `multi_year_quarterly_comparison`.
 
 ## Scope Guardrails
 
